@@ -41,6 +41,10 @@
         }
         img, video {
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            /* 防止长按保存、拖拽和选中 */
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+            user-select: none;
         }
         /* 隐藏元素的类（用于分类筛选） */
         .hidden-item {
@@ -204,78 +208,85 @@
             -->
             <div class="columns-1 sm:columns-2 lg:columns-3 masonry-grid" id="portfolio-gallery">
 
-                <!-- ⬇️⬇️⬇️ 作品添加示例区 ⬇️⬇️⬇️ -->
+                <!-- ⬇️⬇️⬇️ 作品展示区 ⬇️⬇️⬇️ -->
 
-                <!-- 【AIGC 类别：竖图 9:16 示例】 -->
-                <div class="portfolio-item aigc masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <!-- 替换为你本地的图片路径，例如 src="image/aigc/project1_01.jpg" -->
-                    <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AIGC Fashion" class="w-full h-auto object-cover">
-                    <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6">
-                        <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">Midjourney / Style3D</span>
-                        <h3 class="text-white text-lg font-medium">未来主义机能风探索</h3>
+                <!-- 【视频：26Q4 帽子展示】 -->
+                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm">
+                    <!-- controlsList="nodownload" 隐藏下载按钮，oncontextmenu="return false;" 禁用右键 -->
+                    <video src="video/accessories_hat.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop playsinline controls></video>
+                    <div class="p-4 border border-t-0 border-gray-100">
+                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Accessories</span>
+                        <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子展示视频</h3>
+                    </div>
+                </div>
+
+                <!-- 【视频：软软牛仔展示】 -->
+                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm">
+                    <video src="video/soft_denim.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop playsinline controls></video>
+                    <div class="p-4 border border-t-0 border-gray-100">
+                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Campaign</span>
+                        <h3 class="text-gray-900 text-sm font-medium">软软牛仔 展示宣发</h3>
                     </div>
                 </div>
 
                 <!-- 【服装企划 类别：横图 16:9 示例】 -->
                 <div class="portfolio-item fashion masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1550614000-4b95d4ebfaad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fashion Trend" class="w-full h-auto object-cover">
-                    <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6">
+                    <!-- img 也加入了 oncontextmenu="return false;" 和 draggable="false" -->
+                    <img src="https://images.unsplash.com/photo-1550614000-4b95d4ebfaad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fashion Trend" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                    <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6 pointer-events-none">
                         <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">Trend Proposal / PPT</span>
                         <h3 class="text-white text-lg font-medium">2024AW 童装趋势企划提案</h3>
                         <p class="text-gray-300 text-xs mt-2">包含完整的市场调研与品类规划演示文稿</p>
                     </div>
                 </div>
 
+                <!-- 【视频：26Q3 飞翼书包2.0】 -->
+                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm">
+                    <video src="video/feiyi-2.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop playsinline controls></video>
+                    <div class="p-4 border border-t-0 border-gray-100">
+                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Product Video</span>
+                        <h3 class="text-gray-900 text-sm font-medium">26Q3 飞翼书包2.0 宣传片</h3>
+                    </div>
+                </div>
+
+                <!-- 【AIGC 类别：竖图 9:16 示例】 -->
+                <div class="portfolio-item aigc masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AIGC Fashion" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                    <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6 pointer-events-none">
+                        <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">Midjourney / Style3D</span>
+                        <h3 class="text-white text-lg font-medium">未来主义机能风探索</h3>
+                    </div>
+                </div>
+
+                <!-- 【视频：26Q4 帽子展示 (supplies 1)】 -->
+                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm">
+                    <video src="video/supplies_video_1.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop playsinline controls></video>
+                    <div class="p-4 border border-t-0 border-gray-100">
+                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Accessories</span>
+                        <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子细节展示 01</h3>
+                    </div>
+                </div>
+
                 <!-- 【服装企划 类别：多页 PPT 截图横图 16:9 示例】 -->
                 <div class="portfolio-item fashion masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="PPT Presentation" class="w-full h-auto object-cover">
-                    <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="PPT Presentation" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                    <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6 pointer-events-none">
                         <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">Strategy & Planning / PPT</span>
                         <h3 class="text-white text-lg font-medium">婴幼童产品线创意企划案</h3>
                         <p class="text-gray-300 text-xs mt-2">完整生活方式洞察与落地规划展示 (共35页)</p>
                     </div>
                 </div>
 
-                <!-- 【视频 类别：横版视频 16:9 示例】 -->
+                <!-- 【视频：26Q4 帽子展示 (supplies 2)】 -->
                 <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm">
-                    <!-- 替换为你本地的视频路径，例如 src="video/campaign/promo_01.mp4" -->
-                    <!-- muted loop playsinline controls 可保证在不同设备上的兼容性 -->
-                    <video src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-posing-for-the-camera-in-a-studio-34440-large.mp4" class="w-full h-auto object-cover" muted loop playsinline controls poster="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"></video>
-                    <!-- 视频类型可以考虑不加全屏遮罩，以免影响点击播放控制 -->
+                    <video src="video/supplies_video_2.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop playsinline controls></video>
                     <div class="p-4 border border-t-0 border-gray-100">
-                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Campaign Video</span>
-                        <h3 class="text-gray-900 text-sm font-medium">户外系列视觉宣发短片</h3>
+                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Accessories</span>
+                        <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子细节展示 02</h3>
                     </div>
                 </div>
 
-                <!-- 【AIGC 类别：横图 16:9 示例】 -->
-                <div class="portfolio-item aigc masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1618221118493-9cfa1a1c00da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AIGC Concept" class="w-full h-auto object-cover">
-                    <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6">
-                        <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">ComfyUI Workflow</span>
-                        <h3 class="text-white text-lg font-medium">商业级高保真材质生成</h3>
-                    </div>
-                </div>
-
-                <!-- 【服装企划 类别：竖图 9:16 示例】 -->
-                <div class="portfolio-item fashion masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Apparel Design" class="w-full h-auto object-cover">
-                    <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6">
-                        <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">FIT Award Winner</span>
-                        <h3 class="text-white text-lg font-medium">高能防护雪服设计细节</h3>
-                    </div>
-                </div>
-
-                <!-- 【视频 类别：竖版视频 9:16 示例】 -->
-                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm">
-                    <video src="https://assets.mixkit.co/videos/preview/mixkit-girl-in-a-fashion-photoshoot-in-a-studio-34444-large.mp4" class="w-full h-auto object-cover" muted loop playsinline controls></video>
-                    <div class="p-4 border border-t-0 border-gray-100">
-                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Behind The Scenes</span>
-                        <h3 class="text-gray-900 text-sm font-medium">打样执行与工艺协同花絮</h3>
-                    </div>
-                </div>
-
-                <!-- ⬆️⬆️⬆️ 复制上方的结构块，替换类别类名(aigc/fashion/video)和资源路径，即可无限添加 ⬆️⬆️⬆️ -->
+                <!-- ⬆️⬆️⬆️ 作品展示区结束 ⬆️⬆️⬆️ -->
 
             </div>
         </div>
@@ -302,6 +313,13 @@
 
     <!-- 交互逻辑：作品分类筛选功能 -->
     <script>
+        // 全局禁用图片和视频的右键菜单
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             const buttons = document.querySelectorAll('.filter-btn');
             const items = document.querySelectorAll('.portfolio-item');
