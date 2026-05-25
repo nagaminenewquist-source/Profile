@@ -9,7 +9,6 @@
     <!-- 引入 Google 字体：Playfair Display (衬线/高级感) 和 Noto Sans SC (中文无衬线/阅读体验) -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        /* 自定义字体与平滑滚动 */
         body {
             font-family: 'Noto Sans SC', sans-serif;
             background-color: #FAFAFA; /* 极淡的高级灰底色 */
@@ -19,7 +18,7 @@
         .font-serif-custom {
             font-family: 'Playfair Display', serif;
         }
-        /* 瀑布流布局核心类 */
+        
         .masonry-grid {
             column-gap: 1.5rem;
         }
@@ -27,7 +26,6 @@
             break-inside: avoid;
             margin-bottom: 1.5rem;
         }
-        /* 作品遮罩动画 */
         .portfolio-overlay {
             opacity: 0;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -35,10 +33,11 @@
         .group:hover .portfolio-overlay {
             opacity: 1;
         }
-        .group:hover img {
+        .group:hover img, .group:hover video {
             transform: scale(1.03);
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        
         img, video {
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             /* 防止长按保存、拖拽和选中 */
@@ -46,15 +45,21 @@
             -webkit-user-drag: none;
             user-select: none;
         }
-        /* 隐藏元素的类（用于分类筛选） */
         .hidden-item {
             display: none;
+        }
+        
+        #filter-buttons::-webkit-scrollbar {
+            height: 4px;
+        }
+        #filter-buttons::-webkit-scrollbar-thumb {
+            background-color: #e5e7eb;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- 导航栏 -->
     <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-xl font-bold tracking-widest uppercase text-gray-900">Zichen Zhou</a>
@@ -63,14 +68,13 @@
                 <a href="#experience" class="hover:text-gray-500 transition-colors">经历 Experience</a>
                 <a href="#portfolio" class="hover:text-gray-500 transition-colors">作品集 Portfolio</a>
             </div>
-            <!-- 移动端菜单按钮 (视觉占位) -->
+            <!-- 移动端菜单按钮 -->
             <button class="md:hidden block text-gray-800 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
         </div>
     </nav>
 
-    <!-- 头部 Hero 区域 -->
     <header class="pt-32 pb-20 px-6 md:pt-48 md:pb-32 max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between">
         <div class="w-full md:w-2/3">
             <h1 class="text-5xl md:text-7xl font-semibold mb-6 leading-tight">
@@ -88,34 +92,32 @@
         </div>
     </header>
 
-    <!-- 核心优势与简介 -->
     <section id="about" class="bg-white py-20 px-6 border-t border-gray-100">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
                 <h3 class="text-xs font-bold tracking-widest text-gray-400 uppercase mb-4">Core Competencies</h3>
                 <h2 class="text-2xl font-serif-custom mb-4">趋势洞察与企划</h2>
                 <p class="text-gray-600 text-sm leading-loose">
-                    具备女装与童装（全龄段）双线趋势企划经验。擅长基于消费者生活方式，整合市场趋势与创意选题，独立完成高转化率的产品企划提案与品类规划。
+                    具备女装与童装双线趋势企划经验。擅长基于消费者生活方式，整合市场趋势与创意选题，独立完成高转化率的产品企划提案与品类规划。
                 </p>
             </div>
             <div>
                 <h3 class="text-xs font-bold tracking-widest text-gray-400 uppercase mb-4">Innovation</h3>
                 <h2 class="text-2xl font-serif-custom mb-4">AIGC 与数智化实践</h2>
                 <p class="text-gray-600 text-sm leading-loose">
-                    主导《AI在设计企划中的创新应用》项目并获最高分结项。熟练运用 MidJourney、Stable Diffusion、Style3D 等工具，推动 AI 在风格策划、图像生成与服装打样中的实用化落地。
+                    主导《AI在设计企划中的创新应用》项目并获最高分结项。熟练运用 AI 工具推动企划落地、图像生成与快反产品开发，大幅缩短研发周期。
                 </p>
             </div>
             <div>
                 <h3 class="text-xs font-bold tracking-widest text-gray-400 uppercase mb-4">Execution</h3>
                 <h2 class="text-2xl font-serif-custom mb-4">功能户外与材料实战</h2>
                 <p class="text-gray-600 text-sm leading-loose">
-                    主导户外运动童装系列开发，覆盖功能材料应用至供应链协同全流程。多项滑雪服/裤设计获国家外观及实用新型专利，并获国际设计大奖。
+                    主导户外运动童装系列开发，覆盖功能材料应用至供应链协同全流程。多项滑雪服/裤设计获国家外观及实用新型专利，并斩获国际设计大奖。
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- 职业经历 -->
     <section id="experience" class="py-24 px-6 bg-gray-50">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-4xl font-serif-custom mb-16 text-center">Professional Experience</h2>
@@ -213,39 +215,32 @@
         </div>
     </section>
 
-    <!-- 作品集展示核心区域 -->
     <section id="portfolio" class="py-24 px-6 bg-white min-h-screen">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12">
                 <div>
                     <h2 class="text-4xl font-serif-custom">Selected Works</h2>
-                    <p class="text-gray-500 mt-2">AIGC 视觉生成 / 趋势企划 / 运动服饰设计 / 视频项目</p>
+                    <p class="text-gray-500 mt-2">AIGC 视觉生成 / 趋势企划 / 运动服饰设计 / 视频与互动</p>
                 </div>
                 
-                <!-- 筛选按钮 -->
+                <!-- 筛选按钮 (包含全部6个类别) -->
                 <div class="flex space-x-2 mt-6 md:mt-0 overflow-x-auto pb-2" id="filter-buttons">
-                    <button class="filter-btn active px-4 py-1.5 text-sm rounded-full bg-black text-white transition-colors" data-filter="all">全部</button>
-                    <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors" data-filter="aigc">AIGC 生成</button>
-                    <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors" data-filter="fashion">服装企划</button>
-                    <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors" data-filter="video">视频项目</button>
+                    <button class="filter-btn active px-4 py-1.5 text-sm rounded-full bg-black text-white transition-colors whitespace-nowrap" data-filter="all">全部</button>
+                    <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors whitespace-nowrap" data-filter="aigc">AIGC 生成</button>
+                    <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors whitespace-nowrap" data-filter="fashion">服装企划</button>
+                    <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors whitespace-nowrap" data-filter="video">视频项目</button>
+                    <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors whitespace-nowrap" data-filter="interactive">互动体验</button>
+                    <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors whitespace-nowrap" data-filter="web">网页设计</button>
                 </div>
             </div>
 
-            <!-- 瀑布流画廊容器 
-                 说明：这里使用了 columns 类来实现无限制叠加素材。
-                 只要按照下面的 DOM 结构复制粘贴，放入对应的 image/ 或 video/ 路径即可，不限数量。
-            -->
             <div class="columns-1 sm:columns-2 lg:columns-3 masonry-grid" id="portfolio-gallery">
 
-                <!-- ⬇️⬇️⬇️ 作品展示区 ⬇️⬇️⬇️ -->
-
-                <!-- 【视频：26Q4 帽子展示】 -->
+                <!-- 1. 【视频：26Q4 帽子展示】 -->
                 <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
                     <div class="relative pointer-events-none">
-                        <!-- 在外网格去掉了 controls 替换为 autoplay muted loop，将其变成动态缩略图，点击后进入全屏有声播放 -->
                         <video src="video/accessories_hat.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
                     </div>
-                    <!-- 悬浮播放图标与遮罩 -->
                     <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
                         <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </div>
@@ -255,7 +250,34 @@
                     </div>
                 </div>
 
-                <!-- 【视频：软软牛仔展示】 -->
+                <!-- 2. 【AIGC：226女中童快反系列工作流】 -->
+                <div class="portfolio-item aigc masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
+                    <!-- 请确保你已将拼接好的封面图放在此处 -->
+                    <img src="image/aigc/226_cover.jpg" alt="AIGC Workflow" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                    <div class="portfolio-overlay absolute inset-0 bg-black/70 flex flex-col justify-end p-6 pointer-events-none">
+                        <span class="text-xs text-green-400 mb-1 uppercase tracking-widest">AI Workflow / Fast Fashion</span>
+                        <h3 class="text-white text-lg font-medium">226女中童快反系列 (草图转生成)</h3>
+                        <p class="text-gray-300 text-xs mt-2 leading-relaxed">
+                            从 11 张设计师线稿出发，利用 AI 独立生成 11 款精细化款式图、8 张高保真模特上身图及主视觉海报，大幅缩短开发周期。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 3. 【视频：玩具羽绒灵感来源】 -->
+                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
+                    <div class="relative pointer-events-none">
+                        <video src="video/toy_down_coat_moodvideo.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
+                    </div>
+                    <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
+                        <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="p-4 border border-t-0 border-gray-100 relative z-20 bg-white">
+                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Mood Video</span>
+                        <h3 class="text-gray-900 text-sm font-medium">玩具羽绒系列 灵感概念短片</h3>
+                    </div>
+                </div>
+
+                <!-- 4. 【视频：软软牛仔展示】 -->
                 <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
                     <div class="relative pointer-events-none">
                         <video src="video/soft_denim.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
@@ -269,18 +291,18 @@
                     </div>
                 </div>
 
-                <!-- 【服装企划 类别：横图 16:9 示例】 -->
-                <div class="portfolio-item fashion masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <!-- img 也加入了 oncontextmenu="return false;" 和 draggable="false" -->
-                    <img src="https://images.unsplash.com/photo-1550614000-4b95d4ebfaad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fashion Trend" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                <!-- 5. 【互动体验：H5 小游戏二维码】 -->
+                <div class="portfolio-item interactive masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
+                    <!-- 请制作一张包含二维码的海报图放在这里 -->
+                    <img src="image/interactive/game_qr.jpg" alt="Mini Game QR Code" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
                     <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6 pointer-events-none">
-                        <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">Trend Proposal / PPT</span>
-                        <h3 class="text-white text-lg font-medium">2024AW 童装趋势企划提案</h3>
-                        <p class="text-gray-300 text-xs mt-2">包含完整的市场调研与品类规划演示文稿</p>
+                        <span class="text-xs text-blue-300 mb-1 uppercase tracking-widest">Interactive Game / QR Code</span>
+                        <h3 class="text-white text-lg font-medium">独立开发 H5 互动小游戏</h3>
+                        <p class="text-gray-300 text-xs mt-2">扫描海报二维码即可体验，探索服饰视觉与数字交互的跨界可能性。</p>
                     </div>
                 </div>
 
-                <!-- 【视频：26Q3 飞翼书包2.0】 -->
+                <!-- 6. 【视频：26Q3 飞翼书包2.0】 -->
                 <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
                     <div class="relative pointer-events-none">
                         <video src="video/feiyi-2.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
@@ -294,16 +316,18 @@
                     </div>
                 </div>
 
-                <!-- 【AIGC 类别：竖图 9:16 示例】 -->
-                <div class="portfolio-item aigc masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AIGC Fashion" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                <!-- 7. 【服装企划：企划 PPT 长图存档】 -->
+                <div class="portfolio-item fashion masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
+                    <!-- 请将企划PPT转为长图/拼图放在这里 -->
+                    <img src="image/fashion/trend_ppt_cover.jpg" alt="PPT Presentation" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
                     <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6 pointer-events-none">
-                        <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">Midjourney / Style3D</span>
-                        <h3 class="text-white text-lg font-medium">未来主义机能风探索</h3>
+                        <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">Strategy & Planning / PPT</span>
+                        <h3 class="text-white text-lg font-medium">婴幼童产品线创意企划案</h3>
+                        <p class="text-gray-300 text-xs mt-2">完整生活方式洞察与落地规划展示</p>
                     </div>
                 </div>
 
-                <!-- 【视频：26Q4 帽子展示 (supplies 1)】 -->
+                <!-- 8. 【视频：26Q4 帽子展示 (supplies 1)】 -->
                 <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
                     <div class="relative pointer-events-none">
                         <video src="video/supplies_video_1.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
@@ -316,18 +340,21 @@
                         <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子细节展示 01</h3>
                     </div>
                 </div>
-
-                <!-- 【服装企划 类别：多页 PPT 截图横图 16:9 示例】 -->
-                <div class="portfolio-item fashion masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="PPT Presentation" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
-                    <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6 pointer-events-none">
-                        <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">Strategy & Planning / PPT</span>
-                        <h3 class="text-white text-lg font-medium">婴幼童产品线创意企划案</h3>
-                        <p class="text-gray-300 text-xs mt-2">完整生活方式洞察与落地规划展示 (共35页)</p>
+                
+                <!-- 9. 【网页设计：已下线活动存档】 -->
+                <div class="portfolio-item web masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
+                    <!-- 这里放入你套好手机/电脑样机外壳的网页截图 -->
+                    <img src="image/web/campaign_h5_archive.jpg" alt="Campaign Web Design" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                    <div class="portfolio-overlay absolute inset-0 bg-black/70 flex flex-col justify-end p-6 pointer-events-none">
+                        <span class="text-xs text-purple-300 mb-1 uppercase tracking-widest">Web Design / UI</span>
+                        <h3 class="text-white text-lg font-medium">品牌营销活动落地页设计</h3>
+                        <p class="text-gray-300 text-xs mt-2 leading-relaxed">
+                            负责活动 H5 视觉设计与交互动效策划 (注：活动已下线，此处为交互界面存档展示)。
+                        </p>
                     </div>
                 </div>
 
-                <!-- 【视频：26Q4 帽子展示 (supplies 2)】 -->
+                <!-- 10. 【视频：26Q4 帽子展示 (supplies 2)】 -->
                 <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
                     <div class="relative pointer-events-none">
                         <video src="video/supplies_video_2.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
@@ -341,13 +368,10 @@
                     </div>
                 </div>
 
-                <!-- ⬆️⬆️⬆️ 作品展示区结束 ⬆️⬆️⬆️ -->
-
             </div>
         </div>
     </section>
 
-    <!-- 底部联系区域 (信息已做隐匿化处理，保护隐私) -->
     <footer class="bg-black text-white py-20 px-6 text-center">
         <div class="max-w-3xl mx-auto">
             <h2 class="text-3xl font-serif-custom mb-6">Let's Connect</h2>
@@ -367,7 +391,6 @@
         </div>
     </footer>
 
-    <!-- 悬浮放大框 (Lightbox) -->
     <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
         <button id="lightbox-close" class="absolute top-6 right-6 text-white hover:text-gray-400 focus:outline-none z-[101]">
             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -377,7 +400,6 @@
         </div>
     </div>
 
-    <!-- 交互逻辑：作品分类筛选功能与放大弹窗 -->
     <script>
         // 全局禁用图片和视频的右键菜单
         document.addEventListener('contextmenu', function(e) {
@@ -387,12 +409,14 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 分类筛选逻辑 ---
             const buttons = document.querySelectorAll('.filter-btn');
             const items = document.querySelectorAll('.portfolio-item');
 
             buttons.forEach(button => {
                 button.addEventListener('click', () => {
-                    // 1. 切换按钮的激活状态样式
+                    // 1. 切换按钮样式
                     buttons.forEach(btn => {
                         btn.classList.remove('bg-black', 'text-white');
                         btn.classList.add('border', 'border-gray-300', 'text-gray-600');
@@ -400,18 +424,14 @@
                     button.classList.remove('border', 'border-gray-300', 'text-gray-600');
                     button.classList.add('bg-black', 'text-white');
 
-                    // 2. 获取当前点击的分类名称
+                    // 2. 过滤作品
                     const filterValue = button.getAttribute('data-filter');
-
-                    // 3. 过滤作品
                     items.forEach(item => {
                         if (filterValue === 'all' || item.classList.contains(filterValue)) {
-                            // 移除隐藏类，配合淡入动画
                             item.classList.remove('hidden-item');
                             setTimeout(() => { item.style.opacity = '1'; }, 50);
                         } else {
                             item.style.opacity = '0';
-                            // 等待过渡动画结束后隐藏 DOM
                             setTimeout(() => { item.classList.add('hidden-item'); }, 300);
                         }
                     });
@@ -424,20 +444,17 @@
             const lightboxClose = document.getElementById('lightbox-close');
             let currentExpandedVideo = null;
 
-            // 给所有作品绑定点击放大事件
             document.querySelectorAll('.portfolio-item').forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
                     const img = this.querySelector('img');
                     const video = this.querySelector('video');
-                    lightboxContent.innerHTML = ''; // 清空之前的内容
+                    lightboxContent.innerHTML = ''; 
 
                     if (img) {
                         const cloneImg = document.createElement('img');
                         cloneImg.src = img.src;
                         cloneImg.className = 'max-w-full max-h-[90vh] object-contain shadow-2xl rounded-md';
-                        // 继承防下载属性
                         cloneImg.setAttribute('oncontextmenu', 'return false;');
                         cloneImg.setAttribute('draggable', 'false');
                         cloneImg.style.webkitUserDrag = 'none';
@@ -447,7 +464,6 @@
                         const cloneVideo = document.createElement('video');
                         cloneVideo.src = video.src;
                         cloneVideo.className = 'max-w-full max-h-[90vh] object-contain shadow-2xl rounded-md';
-                        // 开启控制条方便用户调整进度，但保留防下载属性
                         cloneVideo.controls = true;
                         cloneVideo.autoplay = true;
                         cloneVideo.setAttribute('controlsList', 'nodownload');
@@ -456,31 +472,26 @@
                         currentExpandedVideo = cloneVideo;
                     }
 
-                    // 显示弹窗
                     lightbox.classList.remove('hidden');
-                    // 强制浏览器重绘，使得 opacity 过渡生效
-                    void lightbox.offsetWidth;
+                    void lightbox.offsetWidth; // 触发重绘
                     lightbox.classList.remove('opacity-0');
                 });
             });
 
-            // 关闭弹窗函数
             const closeLightbox = () => {
                 lightbox.classList.add('opacity-0');
                 setTimeout(() => {
                     lightbox.classList.add('hidden');
-                    lightboxContent.innerHTML = ''; // 清理 DOM
+                    lightboxContent.innerHTML = ''; 
                     if (currentExpandedVideo) {
                         currentExpandedVideo.pause();
                         currentExpandedVideo = null;
                     }
-                }, 300); // 对应 Tailwind 的 duration-300
+                }, 300); 
             };
 
-            // 绑定关闭事件
             lightboxClose.addEventListener('click', closeLightbox);
             lightbox.addEventListener('click', (e) => {
-                // 点击背景区域时关闭（不包括点击图片/视频本身）
                 if (e.target === lightbox || e.target === lightboxContent) {
                     closeLightbox();
                 }
