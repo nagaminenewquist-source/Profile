@@ -26,20 +26,33 @@
             break-inside: avoid;
             margin-bottom: 1.5rem;
         }
-        .portfolio-overlay {
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        /* 移除原有的 portfolio-overlay 相关样式 */
+        /* 新增：高级呼吸灯外发光效果 */
+        .portfolio-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid #f3f4f6;
         }
-        .group:hover .portfolio-overlay {
-            opacity: 1;
+        .portfolio-card:hover {
+            /* 柔和且高级的弥散阴影，模拟呼吸灯/外发光 */
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.12), 0 0 10px rgba(0, 0, 0, 0.04);
+            transform: translateY(-4px);
+            border-color: #e5e7eb;
         }
-        .group:hover img, .group:hover video {
-            transform: scale(1.03);
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+        .media-container {
+            overflow: hidden;
+        }
+        
+        /* 统一的图片和视频悬浮微距放大 */
+        .portfolio-card:hover img.scale-hover, 
+        .portfolio-card:hover video.scale-hover {
+            transform: scale(1.04);
         }
         
         img, video {
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
             /* 防止长按保存、拖拽和选中 */
             -webkit-touch-callout: none;
             -webkit-user-drag: none;
@@ -248,164 +261,172 @@
             <!-- 瀑布流画廊容器 -->
             <div class="columns-1 sm:columns-2 lg:columns-3 masonry-grid" id="portfolio-gallery">
 
-                <!-- 【AIGC：226女中童快反系列 (多图画廊集)】 -->
-                <!-- 注意这里加上了 data-gallery 属性，JS 会拦截点击并渲染多张图 -->
-                <div class="portfolio-item aigc masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer" data-gallery="226_girl">
-                    <img src="image/aigc/226_cover.jpg" alt="AIGC Workflow" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
-                    <div class="portfolio-overlay absolute inset-0 bg-black/70 flex flex-col justify-end p-6 pointer-events-none">
-                        <span class="text-xs text-green-400 mb-1 uppercase tracking-widest">AI Workflow</span>
-                        <h3 class="text-white text-lg font-medium">226女中童快反系列</h3>
-                        <p class="text-gray-300 text-xs mt-2">11张草图 ➡️ 款式图 ➡️ 模特上身图全工作流</p>
+                <!-- 1. 【视频：26Q4 帽子展示】 -->
+                <div class="portfolio-item video masonry-item cursor-pointer">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative pointer-events-none bg-gray-50 aspect-video">
+                            <!-- 加上 scale-hover 类用于悬浮放大 -->
+                            <video src="video/accessories_hat.mp4" controlsList="nodownload" oncontextmenu="return false;" class="scale-hover w-full h-full object-cover" muted loop autoplay playsinline></video>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-gray-400 mb-1.5 block uppercase tracking-widest font-semibold">Accessories</span>
+                            <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子展示视频</h3>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 【视频：玩具羽绒灵感来源】 -->
-                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <div class="relative pointer-events-none">
-                        <video src="video/toy_down_coat_moodvideo.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
-                    </div>
-                    <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
-                        <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <div class="p-4 border border-t-0 border-gray-100 relative z-20 bg-white">
-                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Mood Video</span>
-                        <h3 class="text-gray-900 text-sm font-medium">玩具羽绒 灵感概念短片</h3>
-                    </div>
-                </div>
-
-                <!-- 【互动体验：H5 小游戏二维码】 -->
-                <div class="portfolio-item interactive masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <!-- 请制作一张包含二维码的海报图放在这里 -->
-                    <img src="image/interactive/game_qr.jpg" alt="Mini Game QR Code" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
-                    <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6 pointer-events-none">
-                        <span class="text-xs text-blue-300 mb-1 uppercase tracking-widest">Interactive Game / QR Code</span>
-                        <h3 class="text-white text-lg font-medium">独立开发 H5 互动小游戏</h3>
-                        <p class="text-gray-300 text-xs mt-2">扫描海报二维码即可体验数字交互跨界</p>
+                <!-- 2. 【AIGC：226女中童快反系列工作流】 -->
+                <div class="portfolio-item aigc masonry-item cursor-pointer" data-gallery="226_girl">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative bg-gray-50">
+                            <img src="image/aigc/226_cover.jpg" alt="AIGC Workflow" class="scale-hover w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-green-500 mb-1.5 block uppercase tracking-widest font-semibold">AI Workflow / Fast Fashion</span>
+                            <h3 class="text-gray-900 text-sm font-medium mb-2">226女中童快反系列 (草图转生成)</h3>
+                            <p class="text-gray-500 text-xs leading-relaxed">
+                                从 11 张设计师线稿出发，利用 AI 独立生成 11 款精细化款式图、8 张高保真模特上身图及主视觉海报，大幅缩短开发周期。
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 【网页设计：滨江地图 (长图滑动横屏展示)】 -->
-                <!-- 此处将长图嵌套在静态手机壳下，利用 no-scrollbar 实现内部丝滑横向滚动 -->
-                <div class="portfolio-item web w-full mb-6 break-inside-avoid relative group overflow-hidden bg-white border border-gray-100 rounded-xl p-8 cursor-default">
-                    <div class="space-y-10">
-                        <div>
-                            <div class="text-xs text-orange-500 mb-1 uppercase tracking-widest font-bold">Web Design / 滨江快闪店交互地图</div>
-                            <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-3xl mt-2">
+                <!-- 3. 【视频：玩具羽绒灵感来源】 -->
+                <div class="portfolio-item video masonry-item cursor-pointer">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative pointer-events-none bg-gray-50 aspect-video">
+                            <video src="video/toy_down_coat_moodvideo.mp4" controlsList="nodownload" oncontextmenu="return false;" class="scale-hover w-full h-full object-cover" muted loop autoplay playsinline></video>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-gray-400 mb-1.5 block uppercase tracking-widest font-semibold">Mood Video</span>
+                            <h3 class="text-gray-900 text-sm font-medium">玩具羽绒系列 灵感概念短片</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 【视频：软软牛仔展示】 -->
+                <div class="portfolio-item video masonry-item cursor-pointer">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative pointer-events-none bg-gray-50 aspect-video">
+                            <video src="video/soft_denim.mp4" controlsList="nodownload" oncontextmenu="return false;" class="scale-hover w-full h-full object-cover" muted loop autoplay playsinline></video>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-gray-400 mb-1.5 block uppercase tracking-widest font-semibold">Campaign</span>
+                            <h3 class="text-gray-900 text-sm font-medium">软软牛仔 展示宣发</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. 【互动体验：H5 小游戏二维码】 -->
+                <div class="portfolio-item interactive masonry-item cursor-pointer">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative bg-gray-50">
+                            <img src="image/interactive/game_qr.jpg" alt="Mini Game QR Code" class="scale-hover w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-blue-500 mb-1.5 block uppercase tracking-widest font-semibold">Interactive Game / QR Code</span>
+                            <h3 class="text-gray-900 text-sm font-medium mb-2">独立开发 H5 互动小游戏</h3>
+                            <p class="text-gray-500 text-xs">扫描海报二维码即可体验，探索服饰视觉与数字交互的跨界可能性。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. 【网页设计：滨江地图 (手机样机点击放大)】 -->
+                <!-- 使用 data-gallery="binjiang_web" 标记，让 JS 拦截处理特殊的放大逻辑 -->
+                <div class="portfolio-item web masonry-item cursor-pointer" data-gallery="binjiang_web">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden p-6 sm:p-8">
+                        <div class="mb-6">
+                            <span class="text-xs text-orange-500 mb-1.5 block uppercase tracking-widest font-semibold">Web Design / 滨江快闪店交互地图</span>
+                            <p class="text-slate-600 text-sm leading-relaxed">
                                 为线下快闪店定制的线上导览工具。支持全景长图浏览，结合 AI 设计元素，为用户提供沉浸式导览体验。
                             </p>
                         </div>
                         
-                        <!-- 手机样机外壳与滑动内胆 -->
-                        <div class="relative w-full max-w-4xl mx-auto rounded-[2rem] sm:rounded-[4rem] overflow-hidden shadow-2xl border-2 sm:border-4 border-slate-900 bg-slate-800">
-                            <!-- 外框：横向手机壳 png -->
-                            <img src="image/web/phone.png" class="relative z-20 w-full h-auto pointer-events-none" alt="Phone Frame">
-                            
-                            <!-- 内部：可横向滑动的长图 -->
-                            <div class="absolute inset-0 z-10 overflow-x-auto overflow-y-hidden no-scrollbar flex items-center px-4 sm:px-12">
-                                <!-- h-[88%] 是为了让长图完美适配手机壳屏幕内框高度，可微调 -->
-                                <img src="image/web/binjiang_map.png" class="h-[88%] w-auto max-w-none block rounded-md" alt="Map" oncontextmenu="return false;" draggable="false">
+                        <!-- 纯视觉展示的手机壳（去掉内部溢出滚动，变为一张静态复合图的感觉） -->
+                        <div class="media-container relative w-full max-w-sm mx-auto flex items-center justify-center">
+                            <!-- 手机外壳 -->
+                            <img src="image/web/phone.png" class="scale-hover relative z-20 w-full h-auto pointer-events-none drop-shadow-xl" alt="Phone Frame">
+                            <!-- 内部长图的局部截取预览 -->
+                            <div class="absolute inset-0 z-10 flex items-center justify-center px-[4%]">
+                                <div class="w-full h-[88%] overflow-hidden rounded-md">
+                                    <img src="image/web/binjiang_map.png" class="scale-hover w-full h-full object-cover object-left" alt="Map Preview">
+                                </div>
                             </div>
                         </div>
                         
-                        <!-- 滑动操作提示 -->
-                        <p class="text-center text-slate-400 font-medium text-xs sm:text-sm flex items-center justify-center">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
-                            左右滑动手机内部区域浏览长图内容
+                        <p class="text-center text-slate-400 font-medium text-xs mt-6 flex items-center justify-center">
+                            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                            点击放大后滑动体验
                         </p>
                     </div>
                 </div>
 
-                <!-- 【视频：26Q4 帽子展示】 -->
-                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <div class="relative pointer-events-none">
-                        <video src="video/accessories_hat.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
-                    </div>
-                    <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
-                        <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <div class="p-4 border border-t-0 border-gray-100 relative z-20 bg-white">
-                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Accessories</span>
-                        <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子展示视频</h3>
-                    </div>
-                </div>
-
-                <!-- 【视频：软软牛仔展示】 -->
-                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <div class="relative pointer-events-none">
-                        <video src="video/soft_denim.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
-                    </div>
-                    <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
-                        <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <div class="p-4 border border-t-0 border-gray-100 relative z-20 bg-white">
-                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Campaign</span>
-                        <h3 class="text-gray-900 text-sm font-medium">软软牛仔 展示宣发</h3>
+                <!-- 7. 【视频：26Q3 飞翼书包2.0】 -->
+                <div class="portfolio-item video masonry-item cursor-pointer">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative pointer-events-none bg-gray-50 aspect-video">
+                            <video src="video/feiyi-2.mp4" controlsList="nodownload" oncontextmenu="return false;" class="scale-hover w-full h-full object-cover" muted loop autoplay playsinline></video>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-gray-400 mb-1.5 block uppercase tracking-widest font-semibold">Product Video</span>
+                            <h3 class="text-gray-900 text-sm font-medium">26Q3 飞翼书包2.0 宣传片</h3>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 【服装企划 类别：横图 16:9 示例】 -->
-                <div class="portfolio-item fashion masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <!-- 请将企划PPT转为长图/拼图放在这里 -->
-                    <img src="image/fashion/trend_ppt_cover.jpg" alt="PPT Presentation" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
-                    <div class="portfolio-overlay absolute inset-0 bg-black/60 flex flex-col justify-end p-6 pointer-events-none">
-                        <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">Strategy & Planning / PPT</span>
-                        <h3 class="text-white text-lg font-medium">婴幼童产品线创意企划案</h3>
-                        <p class="text-gray-300 text-xs mt-2">完整生活方式洞察与落地规划展示</p>
+                <!-- 8. 【服装企划：企划 PPT 长图存档】 -->
+                <div class="portfolio-item fashion masonry-item cursor-pointer">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative bg-gray-50">
+                            <img src="image/fashion/trend_ppt_cover.jpg" alt="PPT Presentation" class="scale-hover w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-gray-400 mb-1.5 block uppercase tracking-widest font-semibold">Strategy & Planning / PPT</span>
+                            <h3 class="text-gray-900 text-sm font-medium mb-2">婴幼童产品线创意企划案</h3>
+                            <p class="text-gray-500 text-xs">完整生活方式洞察与落地规划展示</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 【视频：26Q3 飞翼书包2.0】 -->
-                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <div class="relative pointer-events-none">
-                        <video src="video/feiyi-2.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
-                    </div>
-                    <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
-                        <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <div class="p-4 border border-t-0 border-gray-100 relative z-20 bg-white">
-                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Product Video</span>
-                        <h3 class="text-gray-900 text-sm font-medium">26Q3 飞翼书包2.0 宣传片</h3>
-                    </div>
-                </div>
-
-                <!-- 8. 【视频：26Q4 帽子展示 (supplies 1)】 -->
-                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <div class="relative pointer-events-none">
-                        <video src="video/supplies_video_1.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
-                    </div>
-                    <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
-                        <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <div class="p-4 border border-t-0 border-gray-100 relative z-20 bg-white">
-                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Accessories</span>
-                        <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子细节展示 01</h3>
+                <!-- 9. 【视频：26Q4 帽子展示 (supplies 1)】 -->
+                <div class="portfolio-item video masonry-item cursor-pointer">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative pointer-events-none bg-gray-50 aspect-video">
+                            <video src="video/supplies_video_1.mp4" controlsList="nodownload" oncontextmenu="return false;" class="scale-hover w-full h-full object-cover" muted loop autoplay playsinline></video>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-gray-400 mb-1.5 block uppercase tracking-widest font-semibold">Accessories</span>
+                            <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子细节展示 01</h3>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- 9. 【网页设计：已下线活动存档】 -->
-                <div class="portfolio-item web masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <!-- 这里放入你套好手机/电脑样机外壳的网页截图 -->
-                    <img src="image/web/campaign_h5_archive.jpg" alt="Campaign Web Design" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
-                    <div class="portfolio-overlay absolute inset-0 bg-black/70 flex flex-col justify-end p-6 pointer-events-none">
-                        <span class="text-xs text-purple-300 mb-1 uppercase tracking-widest">Web Design / UI</span>
-                        <h3 class="text-white text-lg font-medium">品牌营销活动落地页设计</h3>
-                        <p class="text-gray-300 text-xs mt-2 leading-relaxed">
-                            负责活动 H5 视觉设计与交互动效策划 (注：活动已下线，此处为交互界面存档展示)。
-                        </p>
+                <!-- 10. 【网页设计：已下线活动存档】 -->
+                <div class="portfolio-item web masonry-item cursor-pointer">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative bg-gray-50">
+                            <img src="image/web/campaign_h5_archive.jpg" alt="Campaign Web Design" class="scale-hover w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-purple-500 mb-1.5 block uppercase tracking-widest font-semibold">Web Design / UI</span>
+                            <h3 class="text-gray-900 text-sm font-medium mb-2">品牌营销活动落地页设计</h3>
+                            <p class="text-gray-500 text-xs leading-relaxed">
+                                负责活动 H5 视觉设计与交互动效策划 (注：活动已下线，此处为交互界面存档展示)。
+                            </p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 10. 【视频：26Q4 帽子展示 (supplies 2)】 -->
-                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <div class="relative pointer-events-none">
-                        <video src="video/supplies_video_2.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
-                    </div>
-                    <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
-                        <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <div class="p-4 border border-t-0 border-gray-100 relative z-20 bg-white">
-                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Accessories</span>
-                        <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子细节展示 02</h3>
+                <!-- 11. 【视频：26Q4 帽子展示 (supplies 2)】 -->
+                <div class="portfolio-item video masonry-item cursor-pointer">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative pointer-events-none bg-gray-50 aspect-video">
+                            <video src="video/supplies_video_2.mp4" controlsList="nodownload" oncontextmenu="return false;" class="scale-hover w-full h-full object-cover" muted loop autoplay playsinline></video>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-gray-400 mb-1.5 block uppercase tracking-widest font-semibold">Accessories</span>
+                            <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子细节展示 02</h3>
+                        </div>
                     </div>
                 </div>
 
@@ -494,51 +515,40 @@
                 img.setAttribute('draggable', 'false');
                 img.style.webkitUserDrag = 'none';
                 img.style.userSelect = 'none';
-                // 图片加载失败时直接隐藏，防止出现破图图标
                 img.onerror = function() { this.style.display = 'none'; }; 
                 return img;
             };
 
-            // 给所有作品绑定点击放大事件
             document.querySelectorAll('.portfolio-item').forEach(item => {
-                // 如果是网页设计的样机展示块，不需要点击整个卡片放大
-                if (item.classList.contains('web') && item.querySelector('.no-scrollbar')) return;
-
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
-                    lightboxContent.innerHTML = ''; // 清空之前的内容
+                    lightboxContent.innerHTML = ''; 
                     
-                    // 检查是否是需要动态加载多图的相册（如 226 快反系列）
                     const galleryType = this.getAttribute('data-gallery');
                     
                     if (galleryType === '226_girl') {
-                        // 构建一个纵向滚动的画廊容器
+                        // 226 快反画廊逻辑保持不变
                         const scrollContainer = document.createElement('div');
-                        scrollContainer.className = 'w-full h-full max-h-[90vh] overflow-y-auto bg-black/50 p-4 rounded-xl flex flex-col items-center gap-6';
+                        scrollContainer.className = 'w-full h-full max-h-[90vh] overflow-y-auto custom-scrollbar bg-black/50 p-4 rounded-xl flex flex-col items-center gap-6';
                         
-                        // 添加标题描述
                         const titleDiv = document.createElement('div');
                         titleDiv.innerHTML = '<h3 class="text-white text-2xl font-bold tracking-widest text-center mt-4">226女中童快反系列 工作流展示</h3><p class="text-gray-400 text-sm text-center mb-4">草图 ➡️ 款式图 ➡️ 模特上身图</p>';
                         scrollContainer.appendChild(titleDiv);
 
-                        // 1. 加载海报
-                        scrollContainer.appendChild(createProtectedImage('image/aigc/226_girl/poster_main.jpg', 'w-full max-w-4xl h-auto shadow-xl rounded'));
+                        scrollContainer.appendChild(createProtectedImage('image/aigc/226_cover.jpg', 'w-full max-w-4xl h-auto shadow-xl rounded'));
                         
-                        // 2. 加载草图 (1-11)
                         const sketchTitle = document.createElement('h4'); sketchTitle.className = 'text-gray-300 font-bold tracking-widest uppercase mt-8 mb-2 border-b border-gray-600 pb-2 w-full max-w-4xl'; sketchTitle.innerText = 'Phase 1: Sketches (1-11)'; scrollContainer.appendChild(sketchTitle);
                         for(let i=1; i<=11; i++) {
                             const num = i.toString().padStart(2, '0');
                             scrollContainer.appendChild(createProtectedImage(`image/aigc/226_girl/sketch_${num}.jpg`, 'w-full max-w-4xl h-auto shadow-xl rounded'));
                         }
 
-                        // 3. 加载款式图 (1-11)
                         const flatTitle = document.createElement('h4'); flatTitle.className = 'text-gray-300 font-bold tracking-widest uppercase mt-8 mb-2 border-b border-gray-600 pb-2 w-full max-w-4xl'; flatTitle.innerText = 'Phase 2: Flats (1-11)'; scrollContainer.appendChild(flatTitle);
                         for(let i=1; i<=11; i++) {
                             const num = i.toString().padStart(2, '0');
                             scrollContainer.appendChild(createProtectedImage(`image/aigc/226_girl/flat_${num}.jpg`, 'w-full max-w-4xl h-auto shadow-xl rounded'));
                         }
 
-                        // 4. 加载模特上身图 (1-8)
                         const modelTitle = document.createElement('h4'); modelTitle.className = 'text-gray-300 font-bold tracking-widest uppercase mt-8 mb-2 border-b border-gray-600 pb-2 w-full max-w-4xl'; modelTitle.innerText = 'Phase 3: Model Fits (1-8)'; scrollContainer.appendChild(modelTitle);
                         for(let i=1; i<=8; i++) {
                             const num = i.toString().padStart(2, '0');
@@ -547,10 +557,48 @@
 
                         lightboxContent.appendChild(scrollContainer);
 
+                    } else if (galleryType === 'binjiang_web') {
+                        // 新增：滨江地图的专门放大展示逻辑（生成横滑区域）
+                        const phoneContainer = document.createElement('div');
+                        phoneContainer.className = 'relative w-full max-w-5xl mx-auto flex items-center justify-center';
+                        
+                        const phoneImg = document.createElement('img');
+                        phoneImg.src = 'image/web/phone.png';
+                        phoneImg.className = 'relative z-20 w-full h-auto pointer-events-none drop-shadow-2xl';
+                        phoneContainer.appendChild(phoneImg);
+
+                        const scrollArea = document.createElement('div');
+                        scrollArea.className = 'absolute inset-0 z-10 flex items-center px-[4%] overflow-x-auto custom-scrollbar';
+                        // 移除纵向滚动条显示，仅允许横向
+                        scrollArea.style.overflowY = 'hidden';
+                        
+                        const mapImg = document.createElement('img');
+                        mapImg.src = 'image/web/binjiang_map.png';
+                        mapImg.className = 'h-[88%] w-auto max-w-none block rounded-md';
+                        mapImg.setAttribute('oncontextmenu', 'return false;');
+                        mapImg.setAttribute('draggable', 'false');
+                        
+                        scrollArea.appendChild(mapImg);
+                        phoneContainer.appendChild(scrollArea);
+                        
+                        // 外层包装一个容器放提示语
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'w-full h-full flex flex-col items-center justify-center gap-6';
+                        wrapper.appendChild(phoneContainer);
+                        
+                        const hint = document.createElement('p');
+                        hint.className = 'text-gray-300 font-medium tracking-widest flex items-center';
+                        hint.innerHTML = '<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg> 左右滑动手机内部区域浏览';
+                        wrapper.appendChild(hint);
+
+                        lightboxContent.appendChild(wrapper);
+
                     } else {
                         // 正常的单图或单视频加载逻辑
-                        const img = this.querySelector('img');
-                        const video = this.querySelector('video');
+                        // 寻找 portfolio-card 内部的媒体，而不是整个 item
+                        const card = this.querySelector('.portfolio-card');
+                        const img = card.querySelector('img');
+                        const video = card.querySelector('video');
 
                         if (img) {
                             lightboxContent.appendChild(createProtectedImage(img.src, 'max-w-full max-h-[90vh] object-contain shadow-2xl rounded-md'));
@@ -567,7 +615,6 @@
                         }
                     }
 
-                    // 显示弹窗
                     lightbox.classList.remove('hidden');
                     void lightbox.offsetWidth; // 触发重绘
                     lightbox.classList.remove('opacity-0');
