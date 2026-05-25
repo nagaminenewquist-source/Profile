@@ -19,42 +19,53 @@
             font-family: 'Playfair Display', serif;
         }
         
+        .masonry-grid {
+            column-gap: 1.5rem;
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+        .portfolio-overlay {
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .group:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        .group:hover img, .group:hover video {
+            transform: scale(1.03);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        img, video {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            /* 防止长按保存、拖拽和选中 */
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+            user-select: none;
+        }
+        
         /* 隐藏元素的类（用于分类筛选） */
         .hidden-item {
             display: none;
         }
 
-        /* 手机样机外壳样式 */
-        .phone-mockup-wrapper {
-            position: relative;
-            width: 100%;
-            /* 保持 16:9 或手机横屏比例，根据你上传的 phone.png 比例调整 */
-            padding-bottom: 50%; 
-            margin: 0 auto;
+        /* 隐藏横向滚动条但保留滚动效果，视觉更清爽 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
-        .phone-mockup-frame {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none; /* 让鼠标穿透外壳点击内部网页 */
-            z-index: 10;
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
-        .phone-mockup-screen {
-            position: absolute;
-            /* 这些百分比是为了让你嵌套的 iframe 完美贴合 phone.png 的屏幕内框，可能需要微调 */
-            top: 5.5%;
-            left: 3%;
-            width: 94%;
-            height: 89%;
-            border-radius: 36px; /* 匹配 iPhone 的圆角 */
-            overflow: hidden;
-            z-index: 5;
-            background-color: #000;
+        
+        #filter-buttons::-webkit-scrollbar {
+            height: 4px;
         }
-        .phone-mockup-screen iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        #filter-buttons::-webkit-scrollbar-thumb {
+            background-color: #e5e7eb;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -234,27 +245,6 @@
                 </div>
             </div>
 
-            <div class="columns-1 sm:columns-2 lg:columns-3 masonry-grid" id="portfolio-gallery">
-
-                <!-- 1. 【视频：26Q4 帽子展示】 -->
-                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <div class="relative pointer-events-none">
-                        <video src="video/accessories_hat.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
-                    </div>
-                    <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
-                        <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                    <div class="p-4 border border-t-0 border-gray-100 relative z-20 bg-white">
-                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Accessories</span>
-                        <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子展示视频</h3>
-                    </div>
-                </div>
-
-                <!-- 2. 【AIGC：226女中童快反系列工作流】 -->
-                <div class="portfolio-item aigc masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
-                    <!-- 请确保你已将拼接好的封面图放在此处 -->
-                    <img src="image/aigc/226_cover.jpg" alt="AIGC Workflow" class="w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
-                    <div class="portfolio-overlay absolute inset-0 bg-black/70 flex flex-col justify-end p-6 pointer-events-none">
             <!-- 瀑布流画廊容器 -->
             <div class="columns-1 sm:columns-2 lg:columns-3 masonry-grid" id="portfolio-gallery">
 
@@ -294,25 +284,62 @@
                     </div>
                 </div>
 
-                <!-- 【网页设计：滨江活动 H5 (直接展示网页本身)】 -->
-                <!-- 注意：我们将它做成占满整行的卡片，以容纳横屏手机样机 -->
+                <!-- 【网页设计：滨江地图 (长图滑动横屏展示)】 -->
+                <!-- 此处将长图嵌套在静态手机壳下，利用 no-scrollbar 实现内部丝滑横向滚动 -->
                 <div class="portfolio-item web w-full mb-6 break-inside-avoid relative group overflow-hidden bg-white border border-gray-100 rounded-xl p-8 cursor-default">
-                    <div class="mb-6">
-                        <span class="text-xs text-orange-500 mb-1 uppercase tracking-widest font-bold">Campaign Web Design / UI & UX</span>
-                        <h3 class="text-gray-900 text-2xl font-bold mt-1">「活在热爱里」- 滨江社区地图互动 H5</h3>
-                        <p class="text-gray-500 text-sm mt-2 max-w-2xl leading-relaxed">
-                            负责该品牌线下大型营销活动的线上 H5 视觉设计与交互策划。包含强制横屏引导、动态地图探索、多节点动画触发及免责协议电子签署等复杂交互逻辑。（由于活动已下线，此处为核心交互体验留档。您可以直接在下方滑动体验网页功能。）
+                    <div class="space-y-10">
+                        <div>
+                            <div class="text-xs text-orange-500 mb-1 uppercase tracking-widest font-bold">Web Design / 滨江快闪店交互地图</div>
+                            <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-3xl mt-2">
+                                为线下快闪店定制的线上导览工具。支持全景长图浏览，结合 AI 设计元素，为用户提供沉浸式导览体验。
+                            </p>
+                        </div>
+                        
+                        <!-- 手机样机外壳与滑动内胆 -->
+                        <div class="relative w-full max-w-4xl mx-auto rounded-[2rem] sm:rounded-[4rem] overflow-hidden shadow-2xl border-2 sm:border-4 border-slate-900 bg-slate-800">
+                            <!-- 外框：横向手机壳 png -->
+                            <img src="image/web/phone.png" class="relative z-20 w-full h-auto pointer-events-none" alt="Phone Frame">
+                            
+                            <!-- 内部：可横向滑动的长图 -->
+                            <div class="absolute inset-0 z-10 overflow-x-auto overflow-y-hidden no-scrollbar flex items-center px-4 sm:px-12">
+                                <!-- h-[88%] 是为了让长图完美适配手机壳屏幕内框高度，可微调 -->
+                                <img src="image/web/binjiang_map.png" class="h-[88%] w-auto max-w-none block rounded-md" alt="Map" oncontextmenu="return false;" draggable="false">
+                            </div>
+                        </div>
+                        
+                        <!-- 滑动操作提示 -->
+                        <p class="text-center text-slate-400 font-medium text-xs sm:text-sm flex items-center justify-center">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                            左右滑动手机内部区域浏览长图内容
                         </p>
                     </div>
-                    
-                    <!-- 手机样机外壳与内嵌网页 -->
-                    <div class="w-full max-w-4xl mx-auto phone-mockup-wrapper shadow-2xl rounded-3xl">
-                        <!-- 手机外壳图 -->
-                        <img src="image/web/phone.png" alt="Phone Mockup" class="phone-mockup-frame">
-                        <!-- 屏幕内的真实网页 -->
-                        <div class="phone-mockup-screen">
-                            <iframe src="binjiang_map.html" title="滨江社区地图互动"></iframe>
-                        </div>
+                </div>
+
+                <!-- 【视频：26Q4 帽子展示】 -->
+                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
+                    <div class="relative pointer-events-none">
+                        <video src="video/accessories_hat.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
+                    </div>
+                    <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
+                        <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="p-4 border border-t-0 border-gray-100 relative z-20 bg-white">
+                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Accessories</span>
+                        <h3 class="text-gray-900 text-sm font-medium">26Q4 帽子展示视频</h3>
+                    </div>
+                </div>
+
+                <!-- 【视频：软软牛仔展示】 -->
+                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
+                    <div class="relative pointer-events-none">
+                        <video src="video/soft_denim.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
+                    </div>
+                    <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
+                        <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="p-4 border border-t-0 border-gray-100 relative z-20 bg-white">
+                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Campaign</span>
+                        <h3 class="text-gray-900 text-sm font-medium">软软牛仔 展示宣发</h3>
                     </div>
                 </div>
 
@@ -324,6 +351,20 @@
                         <span class="text-xs text-gray-300 mb-1 uppercase tracking-widest">Strategy & Planning / PPT</span>
                         <h3 class="text-white text-lg font-medium">婴幼童产品线创意企划案</h3>
                         <p class="text-gray-300 text-xs mt-2">完整生活方式洞察与落地规划展示</p>
+                    </div>
+                </div>
+
+                <!-- 【视频：26Q3 飞翼书包2.0】 -->
+                <div class="portfolio-item video masonry-item relative group overflow-hidden bg-gray-100 rounded-sm cursor-pointer">
+                    <div class="relative pointer-events-none">
+                        <video src="video/feiyi-2.mp4" controlsList="nodownload" oncontextmenu="return false;" class="w-full h-auto object-cover" muted loop autoplay playsinline></video>
+                    </div>
+                    <div class="portfolio-overlay absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none">
+                        <svg class="w-12 h-12 text-white/80" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="p-4 border border-t-0 border-gray-100 relative z-20 bg-white">
+                        <span class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Product Video</span>
+                        <h3 class="text-gray-900 text-sm font-medium">26Q3 飞翼书包2.0 宣传片</h3>
                     </div>
                 </div>
 
@@ -460,8 +501,8 @@
 
             // 给所有作品绑定点击放大事件
             document.querySelectorAll('.portfolio-item').forEach(item => {
-                // 如果是网页设计的样机展示块，由于里面有可交互的 iframe，不需要点击整个卡片放大
-                if (item.classList.contains('web')) return;
+                // 如果是网页设计的样机展示块，不需要点击整个卡片放大
+                if (item.classList.contains('web') && item.querySelector('.no-scrollbar')) return;
 
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -528,9 +569,31 @@
 
                     // 显示弹窗
                     lightbox.classList.remove('hidden');
-                    void lightbox.offsetWidth;
+                    void lightbox.offsetWidth; // 触发重绘
                     lightbox.classList.remove('opacity-0');
                 });
             });
 
             // 关闭弹窗函数
+            const closeLightbox = () => {
+                lightbox.classList.add('opacity-0');
+                setTimeout(() => {
+                    lightbox.classList.add('hidden');
+                    lightboxContent.innerHTML = ''; 
+                    if (currentExpandedVideo) {
+                        currentExpandedVideo.pause();
+                        currentExpandedVideo = null;
+                    }
+                }, 300); 
+            };
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target === lightboxContent) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
