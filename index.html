@@ -506,17 +506,21 @@
                     </div>
                 </div>
                 
-                <!-- 12. 【网页设计：已下线活动存档】 -->
-                <div class="portfolio-item web masonry-item cursor-pointer">
+                <!-- 14. 【网页设计：世界杯 AI 营销 H5】 -->
+                <div class="portfolio-item web aigc masonry-item cursor-pointer" data-gallery="campaign_h5">
                     <div class="portfolio-card bg-white rounded-xl overflow-hidden">
-                        <div class="media-container relative bg-gray-50">
-                            <img src="image/web/campaign_h5_archive.jpg" alt="Campaign Web Design" class="scale-hover w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                        <div class="media-container relative pointer-events-none bg-black aspect-[9/16]">
+                            <video src="video/campaign_h5_intro.mp4" poster="image/web/campaign_h5/h5_ui_2.png" controlsList="nodownload" oncontextmenu="return false;" class="scale-hover w-full h-full object-cover" muted loop autoplay playsinline></video>
+                            <div class="absolute left-4 bottom-4 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-sm text-white text-[10px] tracking-widest uppercase flex items-center gap-1.5">
+                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 3.8A1 1 0 005 4.65v10.7a1 1 0 001.3.85l8.03-5.35a1 1 0 000-1.7L6.3 3.8z"></path></svg>
+                                开场动画
+                            </div>
                         </div>
                         <div class="p-5">
-                            <span class="text-xs text-purple-500 mb-1.5 block uppercase tracking-widest font-semibold">Web Design / UI</span>
+                            <span class="text-xs text-purple-500 mb-1.5 block uppercase tracking-widest font-semibold">AIGC Campaign / H5 Experience</span>
                             <h3 class="text-gray-900 text-sm font-medium mb-2">品牌营销活动落地页设计</h3>
                             <p class="text-gray-500 text-xs leading-relaxed">
-                                负责活动 H5 视觉设计与交互动效策划 (注：活动已下线，此处为交互界面存档展示)。
+                                世界杯主题 AI 互动 H5：从照片上传、身份与穿搭选择，到生成专属品牌视觉的完整体验设计。
                             </p>
                         </div>
                     </div>
@@ -663,7 +667,8 @@
                 '整合级企划案：从主题概念到货品结构的完整推演规划': 'An integrated plan spanning theme concept, assortment logic and product architecture.',
                 '26Q4 帽子细节展示 01': '26Q4 Headwear Details 01',
                 '品牌营销活动落地页设计': 'Brand Campaign Landing Page',
-                '负责活动 H5 视觉设计与交互动效策划 (注：活动已下线，此处为交互界面存档展示)。': 'H5 campaign visual design and interaction planning. The live campaign has ended; this is an interface archive.',
+                '开场动画': 'Opening Animation',
+                '世界杯主题 AI 互动 H5：从照片上传、身份与穿搭选择，到生成专属品牌视觉的完整体验设计。': 'A World Cup-themed AI H5 experience—from photo upload, persona and outfit selection to a personalized branded visual.',
                 '26Q4 帽子细节展示 02': '26Q4 Headwear Details 02',
                 'm-box 产品展示': 'm-box Product Showcase',
                 '如果您对我的作品、趋势企划方案或 AIGC 工作流感兴趣，': 'Interested in my work, trend planning or AIGC workflows?',
@@ -805,6 +810,61 @@
                             const num = i.toString().padStart(2, '0');
                             scrollContainer.appendChild(createProtectedImage(`image/aigc/226_girl/model_${num}.jpg`, 'w-full max-w-4xl h-auto shadow-xl rounded'));
                         }
+
+                        lightboxContent.appendChild(scrollContainer);
+
+                    } else if (galleryType === 'campaign_h5') {
+                        const scrollContainer = document.createElement('div');
+                        scrollContainer.className = 'w-full h-full max-h-[90vh] overflow-y-auto custom-scrollbar bg-black/60 p-4 md:p-6 rounded-xl flex flex-col items-center gap-5';
+
+                        const titleDiv = document.createElement('div');
+                        titleDiv.className = 'w-full max-w-5xl py-5 px-4 bg-black/80 sticky top-0 z-10 backdrop-blur-sm border-b border-gray-700 text-center shadow-lg';
+                        titleDiv.innerHTML = currentLanguage === 'zh'
+                            ? '<h3 class="text-white text-xl md:text-2xl font-medium tracking-widest">世界杯 AI 互动 H5</h3><p class="text-gray-400 text-xs md:text-sm mt-2">开场动画 · 交互流程 · AI 生成案例</p>'
+                            : '<h3 class="text-white text-xl md:text-2xl font-medium tracking-widest">World Cup AI Interactive H5</h3><p class="text-gray-400 text-xs md:text-sm mt-2">Opening Animation · Experience Flow · AI-generated Results</p>';
+                        scrollContainer.appendChild(titleDiv);
+
+                        const videoTitle = document.createElement('h4');
+                        videoTitle.className = 'text-gray-300 text-xs font-bold tracking-[0.2em] uppercase mt-2 w-full max-w-5xl';
+                        videoTitle.innerText = currentLanguage === 'zh' ? '01 · 开场动画' : '01 · Opening Animation';
+                        scrollContainer.appendChild(videoTitle);
+
+                        const campaignVideo = document.createElement('video');
+                        campaignVideo.src = 'video/campaign_h5_intro.mp4';
+                        campaignVideo.poster = 'image/web/campaign_h5/h5_ui_2.png';
+                        campaignVideo.className = 'w-full max-w-sm h-auto rounded-xl shadow-2xl bg-black';
+                        campaignVideo.controls = true;
+                        campaignVideo.autoplay = true;
+                        campaignVideo.loop = true;
+                        campaignVideo.playsInline = true;
+                        campaignVideo.setAttribute('controlsList', 'nodownload');
+                        campaignVideo.setAttribute('oncontextmenu', 'return false;');
+                        scrollContainer.appendChild(campaignVideo);
+                        currentExpandedVideo = campaignVideo;
+
+                        const uiTitle = document.createElement('h4');
+                        uiTitle.className = 'text-gray-300 text-xs font-bold tracking-[0.2em] uppercase mt-8 pt-6 border-t border-gray-700 w-full max-w-5xl';
+                        uiTitle.innerText = currentLanguage === 'zh' ? '02 · H5 交互流程' : '02 · H5 Experience Flow';
+                        scrollContainer.appendChild(uiTitle);
+
+                        const uiGrid = document.createElement('div');
+                        uiGrid.className = 'grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5 w-full max-w-5xl';
+                        for (let i = 2; i <= 7; i++) {
+                            uiGrid.appendChild(createProtectedImage(`image/web/campaign_h5/h5_ui_${i}.png`, 'w-full h-auto rounded-lg shadow-xl bg-white'));
+                        }
+                        scrollContainer.appendChild(uiGrid);
+
+                        const resultTitle = document.createElement('h4');
+                        resultTitle.className = 'text-gray-300 text-xs font-bold tracking-[0.2em] uppercase mt-8 pt-6 border-t border-gray-700 w-full max-w-5xl';
+                        resultTitle.innerText = currentLanguage === 'zh' ? '03 · AI 生成案例' : '03 · AI-generated Campaign Results';
+                        scrollContainer.appendChild(resultTitle);
+
+                        const resultGrid = document.createElement('div');
+                        resultGrid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full max-w-5xl pb-8';
+                        for (let i = 1; i <= 4; i++) {
+                            resultGrid.appendChild(createProtectedImage(`image/web/campaign_h5/h5_result_${i}.jpg`, 'w-full h-auto rounded-lg shadow-2xl'));
+                        }
+                        scrollContainer.appendChild(resultGrid);
 
                         lightboxContent.appendChild(scrollContainer);
 
