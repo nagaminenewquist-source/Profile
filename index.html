@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZICHEN ZHOU | 周紫晨 - 个人展示页</title>
+    <title>ZICHEN ZHOU | 周紫晨 — Portfolio</title>
+    <meta name="description" content="周紫晨（Zichen Zhou）的双语个人作品集，涵盖服装趋势企划、AIGC 视觉创新与功能运动服饰设计。">
     <!-- 引入 Tailwind CSS 框架 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入 Google 字体：Playfair Display (衬线/高级感) 和 Noto Sans SC (中文无衬线/阅读体验) -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans SC', sans-serif;
@@ -17,6 +18,48 @@
         }
         .font-serif-custom {
             font-family: 'Playfair Display', serif;
+        }
+
+        body.lang-en {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body.lang-en header h1 > span:first-child {
+            display: inline-block;
+            white-space: nowrap;
+            font-size: 2.75rem;
+        }
+
+        @media (min-width: 768px) {
+            body.lang-en header h1 > span:first-child {
+                font-size: 4.5rem;
+            }
+        }
+
+        .language-switch {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.82);
+        }
+
+        .language-btn {
+            min-width: 2.5rem;
+            padding: 0.35rem 0.65rem;
+            border-radius: 9999px;
+            color: #9ca3af;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            transition: all 0.25s ease;
+        }
+
+        .language-btn.active {
+            background: #111827 !important;
+            color: #fff !important;
+            box-shadow: 0 2px 8px rgba(17, 24, 39, 0.16);
         }
         
         .masonry-grid {
@@ -87,23 +130,25 @@
     <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-xl font-bold tracking-widest uppercase text-gray-900">Zichen Zhou</a>
-            <div class="space-x-8 text-sm tracking-widest hidden md:flex">
-                <a href="#about" class="hover:text-gray-500 transition-colors">简介 Profile</a>
-                <a href="#experience" class="hover:text-gray-500 transition-colors">经历 Experience</a>
-                <a href="#portfolio" class="hover:text-gray-500 transition-colors">作品集 Portfolio</a>
+            <div class="flex items-center gap-4 md:gap-8">
+                <div class="space-x-8 text-sm tracking-widest hidden md:flex">
+                    <a href="#about" class="hover:text-gray-500 transition-colors">简介</a>
+                    <a href="#experience" class="hover:text-gray-500 transition-colors">经历</a>
+                    <a href="#portfolio" class="hover:text-gray-500 transition-colors">作品集</a>
+                </div>
+                <div class="language-switch" role="group" aria-label="Language selection">
+                    <button type="button" class="language-btn active" data-lang="zh" aria-pressed="true">中</button>
+                    <button type="button" class="language-btn" data-lang="en" aria-pressed="false">EN</button>
+                </div>
             </div>
-            <!-- 移动端菜单按钮 -->
-            <button class="md:hidden block text-gray-800 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
         </div>
     </nav>
 
     <header class="pt-32 pb-20 px-6 md:pt-48 md:pb-32 max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between">
         <div class="w-full md:w-2/3">
             <h1 class="text-5xl md:text-7xl font-semibold mb-6 leading-tight">
-                周紫晨<br>
-                <span class="text-gray-400 font-light tracking-widest uppercase text-3xl md:text-4xl mt-3 block">Zichen Zhou</span>
+                <span data-zh="周紫晨" data-en="Zichen Zhou">周紫晨</span><br>
+                <span data-zh="Zichen Zhou" data-en="周紫晨" class="text-gray-400 font-light tracking-widest uppercase text-3xl md:text-4xl mt-3 block">Zichen Zhou</span>
             </h1>
             <p class="text-xl md:text-2xl text-gray-600 mb-8 font-light leading-relaxed">
                 服装趋势企划与设计专家 / AIGC 视觉创新探索者。致力于将前沿生成式 AI 技术、材料创新与服饰商业化深度融合。
@@ -544,6 +589,137 @@
         });
 
         document.addEventListener('DOMContentLoaded', () => {
+            // --- 中英文切换 ---
+            const translations = {
+                '简介': 'Profile',
+                '经历': 'Experience',
+                '作品集': 'Portfolio',
+                '服装趋势企划与设计专家 / AIGC 视觉创新探索者。致力于将前沿生成式 AI 技术、材料创新与服饰商业化深度融合。': 'Fashion trend planning and design specialist / AIGC visual innovation explorer. I connect generative AI, material innovation and commercial fashion development.',
+                '中国美术学院·本硕': 'China Academy of Art · BFA & MFA',
+                '上海市中级职称证书（工艺美术师）': 'Shanghai-Certified Arts & Crafts Designer',
+                '2025 FIT 运动设计奖 Winner': '2025 FIT Sports Design Awards · Winner',
+                '趋势洞察与企划': 'Trend Insight & Planning',
+                '具备女装与童装双线趋势企划经验。擅长基于消费者生活方式，整合市场趋势与创意选题，独立完成高转化率的产品企划提案与品类规划。': 'Experienced in trend planning across womenswear and childrenswear. I translate consumer lifestyles and market signals into compelling product concepts and high-conversion category plans.',
+                'AIGC 与数智化实践': 'AIGC & Digital Innovation',
+                '主导《AI在设计企划中的创新应用》项目并获最高分结项。熟练运用 AI 工具推动企划落地、图像生成与快反产品开发，大幅缩短研发周期。': 'Led the top-rated “Innovative Applications of AI in Design Planning” project. I use AI to accelerate concept development, visual generation and rapid-response product creation.',
+                '功能户外与材料实战': 'Performance Apparel & Materials',
+                '主导户外运动童装系列开发，覆盖功能材料应用至供应链协同全流程。多项滑雪服/裤设计获国家外观及实用新型专利，并斩获国际设计大奖。': 'Led end-to-end development of outdoor childrenswear, from performance materials to supply-chain delivery. Multiple ski apparel designs have received national patents and international design recognition.',
+                '浙江森马服饰股份有限公司 (Balabala)': 'Zhejiang Semir Garment Co., Ltd. (Balabala)',
+                '2023.09 - 至今': 'Sep 2023 – Present',
+                'AI创意设计师': 'AI Creative Designer',
+                '2026.01 - 至今': 'Jan 2026 – Present',
+                '项目亮点：': 'Project Highlight: ',
+                '主导巴拉巴拉品牌创新项目《AI在设计企划中的创新应用》。': 'Led Balabala’s brand innovation project, “Innovative Applications of AI in Design Planning.”',
+                '负责全产品线及相关视觉的AI创意生成与设计转化，打通并优化日常设计工作流。': 'Create AI-driven concepts and design assets across product lines while building and optimizing everyday design workflows.',
+                '推进企业内部核心AI平台（巴拉智绘 Bala Canvas、巴拉视界 Bala Vision）的视觉体系搭建与品牌资产沉淀。': 'Develop the visual systems and brand asset libraries for Bala Canvas and Bala Vision, the company’s core internal AI platforms.',
+                '结合公司战略需求，承接并执行创新产品概念落地及品牌IP营销活动的视觉企划。': 'Translate strategic priorities into innovative product concepts and visual plans for brand and IP campaigns.',
+                '创意企划趋势设计师': 'Creative & Trend Planning Designer',
+                '独立负责婴幼童产品线季度创意主题及品类企划，输出洞察报告，产出落地开发规划。': 'Owned seasonal creative themes and category planning for baby and toddler lines, producing insight reports and actionable development roadmaps.',
+                '功能性运动服装设计师': 'Performance Sportswear Designer',
+                '主导户外运动童装产品开发（版师、工艺、面料），全程跟进打样与批复。': 'Led outdoor childrenswear development across pattern, construction and materials, managing sampling through final approval.',
+                '专业荣誉：': 'Recognition: ',
+                '斩获 2025 FIT 运动设计奖（高能防护雪服/稀土防晒衣）。': 'Won two 2025 FIT Sports Design Awards for protective skiwear and rare-earth sun-protective apparel.',
+                '专利成果：': 'Patents: ',
+                '已获3项国家专利（滑雪服裤、缝合结构），另有1项发明专利正在申请中。': 'Granted three national patents covering ski apparel and seam construction, with one invention patent pending.',
+                '书籍出版 & 趋势项目': 'Publications & Trend Research',
+                '专题撰稿人 / 服装设计师': 'Contributing Writer / Fashion Designer',
+                '参与编撰并出版《2023中国时尚茄克流行趋势白皮书》。': 'Contributed to the published “2023 China Fashion Jacket Trend White Paper.”',
+                '连续多年负责《国际/中国皮革裘皮服装设计趋势研究报告》的人群调研、款式设计与编排。': 'Conducted consumer research, fashion design and editorial development for annual international and China leather and fur trend reports.',
+                '早期职业实践': 'Earlier Experience',
+                '杭州宽品贸易：': 'Hangzhou Kuanpin Trading: ',
+                '品牌主理，个人品牌作品曾获淘宝新锐设计师榜第二。': 'Led an independent label whose collection ranked No. 2 on Taobao’s Emerging Designer List.',
+                '江南布衣集团 (JNBY)：': 'JNBY Group: ',
+                '品牌运营助理实习。': 'Brand Operations Assistant Intern.',
+                '创新项目：': 'Innovation Project: ',
+                '主持“蕉麻纤维可持续设计项目”，获国家级/省级创新专项支持。': 'Directed a sustainable abaca-fiber design project supported by national and provincial innovation programs.',
+                'AIGC 视觉生成 / 趋势企划 / 运动服饰设计 / 视频与互动': 'AIGC Visuals / Trend Planning / Sportswear / Film & Interactive',
+                '全部': 'All',
+                'AIGC 生成': 'AIGC',
+                '服装企划': 'Fashion Planning',
+                '视频项目': 'Film',
+                '互动体验': 'Interactive',
+                '网页设计': 'Web Design',
+                '26Q4 帽子展示视频': '26Q4 Headwear Showcase',
+                '226女中童快反系列 (草图转生成)': '226 Girls’ Rapid-Response Collection (Sketch to AI)',
+                '从 11 张设计师线稿出发，利用 AI 独立生成 11 款精细化款式图、8 张高保真模特上身图及主视觉海报，大幅缩短开发周期。': 'Starting with 11 designer sketches, I used AI to create 11 refined flats, 8 high-fidelity model looks and a key campaign visual—significantly shortening the development cycle.',
+                '玩具羽绒系列 灵感概念短片': 'Toy Puffer Collection · Concept Film',
+                '软软牛仔 展示宣发': 'Soft Denim · Campaign Visual',
+                '独立开发 H5 互动小游戏': 'Independent H5 Interactive Game',
+                '扫描海报二维码即可体验，探索服饰视觉与数字交互的跨界可能性。': 'Scan the QR code to explore an interactive experiment connecting fashion visuals and digital play.',
+                'Web Design / 滨江快闪店交互地图': 'Web Design / Binjiang Pop-up Interactive Map',
+                '为线下快闪店定制的线上导览工具。支持全景长图浏览，结合 AI 设计元素，为用户提供沉浸式导览体验。': 'A custom digital guide for an offline pop-up, combining a panoramic map with AI-designed elements for an immersive visitor experience.',
+                '点击放大后滑动体验': 'Click to enlarge and explore',
+                '426 宏观趋势提案': '426 Macro Trend Proposal',
+                '前瞻性市场动向分析与行业宏观风向标预测 (点击查看完整排版)': 'Forward-looking market analysis and macro industry forecasting. Click to view the full presentation.',
+                '426 婴幼童场景企划提案': '426 Baby & Toddler Lifestyle Proposal',
+                '婴幼童全场景生活方式洞察与主题故事演绎 (点击查看完整长图)': 'Lifestyle insight and theme storytelling across baby and toddler scenarios. Click to view the full presentation.',
+                '426 婴幼童品类提案': '426 Baby & Toddler Category Proposal',
+                '针对婴幼童人群的高转化率核心品类矩阵规划': 'A high-conversion core category matrix for the baby and toddler market.',
+                '326 婴幼童场景企划提案': '326 Baby & Toddler Lifestyle Proposal',
+                '春夏人群洞察、核心主题延展及关键视觉方向策划': 'Spring/summer consumer insight, theme development and key visual direction.',
+                '326 婴幼童品类提案': '326 Baby & Toddler Category Proposal',
+                '基于品牌生意目标的单品企划、色彩策略与落地方案': 'Product planning, color strategy and execution aligned with commercial goals.',
+                '226 婴幼童「场景+品类」提案': '226 Baby & Toddler Lifestyle + Category Proposal',
+                '整合级企划案：从主题概念到货品结构的完整推演规划': 'An integrated plan spanning theme concept, assortment logic and product architecture.',
+                '26Q4 帽子细节展示 01': '26Q4 Headwear Details 01',
+                '品牌营销活动落地页设计': 'Brand Campaign Landing Page',
+                '负责活动 H5 视觉设计与交互动效策划 (注：活动已下线，此处为交互界面存档展示)。': 'H5 campaign visual design and interaction planning. The live campaign has ended; this is an interface archive.',
+                '26Q4 帽子细节展示 02': '26Q4 Headwear Details 02',
+                'm-box 产品展示': 'm-box Product Showcase',
+                '如果您对我的作品、趋势企划方案或 AIGC 工作流感兴趣，': 'Interested in my work, trend planning or AIGC workflows?',
+                '欢迎随时与我联系。': 'I would be delighted to connect.'
+            };
+
+            const translatableNodes = [];
+            const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+                acceptNode(node) {
+                    const parentTag = node.parentElement?.tagName;
+                    if (parentTag === 'SCRIPT' || parentTag === 'STYLE') return NodeFilter.FILTER_REJECT;
+                    return translations[node.textContent.trim()] ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+                }
+            });
+
+            while (walker.nextNode()) {
+                const node = walker.currentNode;
+                const zh = node.textContent.trim();
+                translatableNodes.push({ node, zh, en: translations[zh] });
+            }
+
+            let currentLanguage = 'zh';
+            const languageButtons = document.querySelectorAll('.language-btn');
+
+            const applyLanguage = (language) => {
+                currentLanguage = language;
+                document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+                document.body.classList.toggle('lang-en', language === 'en');
+                document.title = language === 'zh'
+                    ? 'ZICHEN ZHOU | 周紫晨 — 个人作品集'
+                    : 'ZICHEN ZHOU | Fashion, Trend & AIGC Portfolio';
+
+                document.querySelectorAll('[data-zh][data-en]').forEach(element => {
+                    element.textContent = element.dataset[language];
+                });
+
+                translatableNodes.forEach(({ node, zh, en }) => {
+                    const leadingSpace = node.textContent.match(/^\s*/)?.[0] || '';
+                    const trailingSpace = node.textContent.match(/\s*$/)?.[0] || '';
+                    node.textContent = `${leadingSpace}${language === 'zh' ? zh : en}${trailingSpace}`;
+                });
+
+                languageButtons.forEach(button => {
+                    const isActive = button.dataset.lang === language;
+                    button.classList.toggle('active', isActive);
+                    button.setAttribute('aria-pressed', isActive.toString());
+                });
+
+                localStorage.setItem('portfolio-language', language);
+            };
+
+            languageButtons.forEach(button => {
+                button.addEventListener('click', () => applyLanguage(button.dataset.lang));
+            });
+
+            applyLanguage(localStorage.getItem('portfolio-language') === 'en' ? 'en' : 'zh');
             
             // --- 分类筛选逻辑 ---
             const buttons = document.querySelectorAll('.filter-btn');
@@ -605,7 +781,9 @@
                         scrollContainer.className = 'w-full h-full max-h-[90vh] overflow-y-auto custom-scrollbar bg-black/50 p-4 rounded-xl flex flex-col items-center gap-6';
                         
                         const titleDiv = document.createElement('div');
-                        titleDiv.innerHTML = '<h3 class="text-white text-2xl font-bold tracking-widest text-center mt-4">226女中童快反系列 工作流展示</h3><p class="text-gray-400 text-sm text-center mb-4">草图 ➡️ 款式图 ➡️ 模特上身图</p>';
+                        titleDiv.innerHTML = currentLanguage === 'zh'
+                            ? '<h3 class="text-white text-2xl font-bold tracking-widest text-center mt-4">226女中童快反系列 工作流展示</h3><p class="text-gray-400 text-sm text-center mb-4">草图 ➡️ 款式图 ➡️ 模特上身图</p>'
+                            : '<h3 class="text-white text-2xl font-bold tracking-widest text-center mt-4">226 Girls’ Rapid-Response Workflow</h3><p class="text-gray-400 text-sm text-center mb-4">Sketches ➡️ Flats ➡️ Model Looks</p>';
                         scrollContainer.appendChild(titleDiv);
 
                         scrollContainer.appendChild(createProtectedImage('image/aigc/226_cover.jpg', 'w-full max-w-4xl h-auto shadow-xl rounded'));
@@ -661,7 +839,7 @@
                         
                         const hint = document.createElement('p');
                         hint.className = 'text-gray-300 font-medium tracking-widest flex items-center';
-                        hint.innerHTML = '<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg> 左右滑动手机内部区域浏览';
+                        hint.innerHTML = `<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg> ${currentLanguage === 'zh' ? '左右滑动手机内部区域浏览' : 'Swipe inside the phone to explore'}`;
                         wrapper.appendChild(hint);
 
                         lightboxContent.appendChild(wrapper);
