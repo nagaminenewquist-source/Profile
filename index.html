@@ -339,7 +339,27 @@
                     </div>
                 </div>
 
-                <!-- 3. 【视频：玩具羽绒灵感来源】 -->
+                <!-- 3. 【AIGC：风的朋友产品视觉转化】 -->
+                <div class="portfolio-item aigc masonry-item cursor-pointer" data-gallery="wind_friends">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative bg-black aspect-[9/16] overflow-hidden">
+                            <img src="image/aigc/wind_friends/looks/look_05.jpg" alt="Friends of the Wind AIGC product visualization" class="scale-hover w-full h-full object-cover" oncontextmenu="return false;" draggable="false">
+                            <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
+                            <div class="absolute left-4 bottom-4 px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm text-black text-[10px] tracking-widest uppercase font-semibold">
+                                AIGC Workflow
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-rose-500 mb-1.5 block uppercase tracking-widest font-semibold">AIGC Product Visualization / Commercial Validation</span>
+                            <h3 class="text-gray-900 text-sm font-medium mb-2">风的朋友｜AIGC 产品视觉转化</h3>
+                            <p class="text-gray-500 text-xs leading-relaxed">
+                                将设计师创意草图快速转化为产品效果图与模特上身视觉，用于方向验证、系列定调与开发沟通。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 【视频：玩具羽绒灵感来源】 -->
                 <div class="portfolio-item video masonry-item cursor-pointer">
                     <div class="portfolio-card bg-white rounded-xl overflow-hidden">
                         <div class="media-container relative pointer-events-none bg-gray-50 aspect-video">
@@ -646,6 +666,8 @@
                 '26Q4 帽子展示视频': '26Q4 Headwear Showcase',
                 '226女中童快反系列 (草图转生成)': '226 Girls’ Rapid-Response Collection (Sketch to AI)',
                 '从 11 张设计师线稿出发，利用 AI 独立生成 11 款精细化款式图、8 张高保真模特上身图及主视觉海报，大幅缩短开发周期。': 'Starting with 11 designer sketches, I used AI to create 11 refined flats, 8 high-fidelity model looks and a key campaign visual—significantly shortening the development cycle.',
+                '风的朋友｜AIGC 产品视觉转化': 'Friends of the Wind | AIGC Product Visualization',
+                '将设计师创意草图快速转化为产品效果图与模特上身视觉，用于方向验证、系列定调与开发沟通。': 'Rapidly translating designer sketches into product and on-body visuals for direction validation, collection alignment and development communication.',
                 '玩具羽绒系列 灵感概念短片': 'Toy Puffer Collection · Concept Film',
                 '软软牛仔 展示宣发': 'Soft Denim · Campaign Visual',
                 '独立开发 H5 互动小游戏': 'Independent H5 Interactive Game',
@@ -811,6 +833,73 @@
                             scrollContainer.appendChild(createProtectedImage(`image/aigc/226_girl/model_${num}.jpg`, 'w-full max-w-4xl h-auto shadow-xl rounded'));
                         }
 
+                        lightboxContent.appendChild(scrollContainer);
+
+                    } else if (galleryType === 'wind_friends') {
+                        const scrollContainer = document.createElement('div');
+                        scrollContainer.className = 'w-full h-full max-h-[90vh] overflow-y-auto custom-scrollbar bg-[#0b0b0d] p-4 md:p-7 rounded-xl flex flex-col items-center gap-5';
+
+                        const titleDiv = document.createElement('div');
+                        titleDiv.className = 'w-full max-w-6xl py-5 px-4 bg-black/85 sticky top-0 z-20 backdrop-blur-sm border-b border-white/10 text-center shadow-lg';
+                        titleDiv.innerHTML = currentLanguage === 'zh'
+                            ? '<p class="text-rose-400 text-[10px] font-semibold tracking-[0.28em] uppercase mb-2">AIGC Product Visualization</p><h3 class="text-white text-xl md:text-3xl font-medium tracking-wider">风的朋友</h3><p class="text-gray-400 text-xs md:text-sm mt-2">创意草图 → 产品视觉 → 模特上身 → 市场落地</p>'
+                            : '<p class="text-rose-400 text-[10px] font-semibold tracking-[0.28em] uppercase mb-2">AIGC Product Visualization</p><h3 class="text-white text-xl md:text-3xl font-medium tracking-wider">Friends of the Wind</h3><p class="text-gray-400 text-xs md:text-sm mt-2">Designer Sketches → Product Visuals → On-body Looks → Market Launch</p>';
+                        scrollContainer.appendChild(titleDiv);
+
+                        const intro = document.createElement('div');
+                        intro.className = 'w-full max-w-6xl rounded-2xl border border-white/10 bg-white/[0.04] p-5 md:p-8 mt-2';
+                        intro.innerHTML = currentLanguage === 'zh'
+                            ? '<p class="text-white text-lg md:text-2xl font-medium leading-relaxed">用 AIGC 将设计师创意快速转化为可讨论、可评估的产品与上身视觉。</p><p class="text-gray-400 text-sm leading-7 mt-3 max-w-4xl">围绕系列方向验证与开发沟通，快速建立从单品细节、材质体积到整套穿搭的视觉参考，降低前期试错成本，并让创意更高效地进入产品决策。</p>'
+                            : '<p class="text-white text-lg md:text-2xl font-medium leading-relaxed">Using AIGC to turn designer concepts into product and on-body visuals that teams can discuss and evaluate.</p><p class="text-gray-400 text-sm leading-7 mt-3 max-w-4xl">The workflow builds fast visual references—from product details and material volume to complete looks—supporting direction validation, development communication and more efficient product decisions.</p>';
+                        scrollContainer.appendChild(intro);
+
+                        const addSectionTitle = (index, zhTitle, enTitle, zhDesc, enDesc) => {
+                            const sectionTitle = document.createElement('div');
+                            sectionTitle.className = 'w-full max-w-6xl mt-7 pt-7 border-t border-white/10';
+                            sectionTitle.innerHTML = `<p class="text-rose-400 text-[10px] font-semibold tracking-[0.25em] uppercase mb-2">${index}</p><h4 class="text-white text-lg md:text-xl font-medium">${currentLanguage === 'zh' ? zhTitle : enTitle}</h4><p class="text-gray-500 text-xs md:text-sm mt-2 leading-relaxed">${currentLanguage === 'zh' ? zhDesc : enDesc}</p>`;
+                            scrollContainer.appendChild(sectionTitle);
+                        };
+
+                        addSectionTitle('01', '产品视觉转化', 'Product Visualization', '将创意语言转译为可感知的廓形、材质、配色与产品细节。', 'Translating creative direction into tangible silhouettes, materials, colorways and product details.');
+                        const productGrid = document.createElement('div');
+                        productGrid.className = 'grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5 w-full max-w-6xl';
+                        ['07', '13', '22', '25', '29', '30', '32', '33', '39'].forEach(num => {
+                            productGrid.appendChild(createProtectedImage(`image/aigc/wind_friends/products/product_${num}.jpg`, 'w-full h-full aspect-square object-cover rounded-xl shadow-2xl bg-white'));
+                        });
+                        scrollContainer.appendChild(productGrid);
+
+                        addSectionTitle('02', '模特上身视觉', 'On-body Visualization', '进一步验证整套搭配、体量关系与系列视觉一致性。', 'Testing complete styling, volume relationships and visual consistency across the collection.');
+                        const lookGrid = document.createElement('div');
+                        lookGrid.className = 'grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5 w-full max-w-6xl';
+                        for (let i = 1; i <= 6; i++) {
+                            const num = i.toString().padStart(2, '0');
+                            lookGrid.appendChild(createProtectedImage(`image/aigc/wind_friends/looks/look_${num}.jpg`, 'w-full h-auto rounded-xl shadow-2xl bg-black'));
+                        }
+                        scrollContainer.appendChild(lookGrid);
+
+                        addSectionTitle('03', '最终落地佐证', 'Official Launch Evidence', '以下为品牌官方发布素材，仅用于说明项目最终市场落地。', 'The following official brand material is included solely as evidence of the project’s market launch.');
+
+                        const disclaimer = document.createElement('div');
+                        disclaimer.className = 'w-full max-w-6xl rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-4 flex gap-3 items-start';
+                        disclaimer.innerHTML = currentLanguage === 'zh'
+                            ? '<span class="text-amber-300 text-base leading-none mt-0.5">ⓘ</span><p class="text-amber-100/90 text-xs md:text-sm leading-relaxed"><strong class="text-amber-200">素材归属说明：</strong>本区图片为品牌官方发布素材，仅用于佐证项目的最终落地；官宣图不属于本人设计交付。</p>'
+                            : '<span class="text-amber-300 text-base leading-none mt-0.5">ⓘ</span><p class="text-amber-100/90 text-xs md:text-sm leading-relaxed"><strong class="text-amber-200">Asset credit:</strong> These are official brand campaign materials shown solely as evidence of the project’s final market launch; the campaign images were not designed by me.</p>';
+                        scrollContainer.appendChild(disclaimer);
+
+                        const launchGrid = document.createElement('div');
+                        launchGrid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full max-w-6xl pb-8';
+                        for (let i = 1; i <= 5; i++) {
+                            const num = i.toString().padStart(2, '0');
+                            const wrapper = document.createElement('div');
+                            wrapper.className = i === 1 ? 'relative md:col-span-2 max-w-xl md:max-w-2xl w-full mx-auto' : 'relative';
+                            wrapper.appendChild(createProtectedImage(`image/aigc/wind_friends/launch/official_${num}.jpg`, 'w-full h-auto rounded-xl shadow-2xl'));
+                            const credit = document.createElement('span');
+                            credit.className = 'absolute top-3 right-3 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-sm text-white/90 text-[9px] tracking-wider';
+                            credit.innerText = currentLanguage === 'zh' ? '品牌官方发布 · 非本人设计' : 'Official brand material · Not designed by me';
+                            wrapper.appendChild(credit);
+                            launchGrid.appendChild(wrapper);
+                        }
+                        scrollContainer.appendChild(launchGrid);
                         lightboxContent.appendChild(scrollContainer);
 
                     } else if (galleryType === 'campaign_h5') {
