@@ -860,13 +860,97 @@
                             scrollContainer.appendChild(sectionTitle);
                         };
 
-                        addSectionTitle('01', '产品视觉转化', 'Product Visualization', '将创意语言转译为可感知的廓形、材质、配色与产品细节。', 'Translating creative direction into tangible silhouettes, materials, colorways and product details.');
-                        const productGrid = document.createElement('div');
-                        productGrid.className = 'grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5 w-full max-w-6xl';
-                        ['07', '13', '22', '25', '29', '30', '32', '33', '39'].forEach(num => {
-                            productGrid.appendChild(createProtectedImage(`image/aigc/wind_friends/products/product_${num}.jpg`, 'w-full h-full aspect-square object-cover rounded-xl shadow-2xl bg-white'));
+                        addSectionTitle('01', '产品视觉转化', 'Product Visualization', '将创意语言转译为可感知的廓形、材质、配色与产品细节，并通过多角度视图完整验证造型。', 'Translating creative direction into tangible silhouettes, materials, colorways and product details, with multi-angle views for complete form validation.');
+
+                        const headpieceHeader = document.createElement('div');
+                        headpieceHeader.className = 'w-full max-w-6xl mt-2';
+                        headpieceHeader.innerHTML = currentLanguage === 'zh'
+                            ? '<h5 class="text-white text-sm font-medium">头套方案三视图</h5><p class="text-gray-500 text-xs mt-1">每组依次展示正面、侧面与背面，图片保留完整轮廓。</p>'
+                            : '<h5 class="text-white text-sm font-medium">Headpiece Three-view Studies</h5><p class="text-gray-500 text-xs mt-1">Each concept is shown from the front, side and back with the full silhouette preserved.</p>';
+                        scrollContainer.appendChild(headpieceHeader);
+
+                        const headpieceGrid = document.createElement('div');
+                        headpieceGrid.className = 'grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 w-full max-w-6xl';
+                        const headpieceGroups = [
+                            ['08', '09', '07'],
+                            ['13', '14', '15'],
+                            ['22', '23', '24'],
+                            ['25', '26', '27']
+                        ];
+                        const viewLabels = currentLanguage === 'zh' ? ['正面', '侧面', '背面'] : ['Front', 'Side', 'Back'];
+                        headpieceGroups.forEach((group, groupIndex) => {
+                            const groupCard = document.createElement('div');
+                            groupCard.className = 'rounded-2xl border border-white/10 bg-white/[0.035] p-3 md:p-4';
+
+                            const groupLabel = document.createElement('p');
+                            groupLabel.className = 'text-gray-300 text-[10px] font-semibold tracking-[0.18em] uppercase mb-3';
+                            groupLabel.innerText = currentLanguage === 'zh' ? `头套方案 ${String(groupIndex + 1).padStart(2, '0')}` : `Headpiece Concept ${String(groupIndex + 1).padStart(2, '0')}`;
+                            groupCard.appendChild(groupLabel);
+
+                            const views = document.createElement('div');
+                            views.className = 'grid grid-cols-3 gap-2';
+                            group.forEach((num, viewIndex) => {
+                                const view = document.createElement('div');
+                                view.className = 'min-w-0';
+                                const imageFrame = document.createElement('div');
+                                imageFrame.className = 'aspect-square rounded-lg bg-white p-1.5 md:p-2 flex items-center justify-center overflow-hidden';
+                                imageFrame.appendChild(createProtectedImage(`image/aigc/wind_friends/products/product_${num}.jpg`, 'w-full h-full object-contain'));
+                                view.appendChild(imageFrame);
+
+                                const viewLabel = document.createElement('p');
+                                viewLabel.className = 'text-center text-gray-500 text-[9px] mt-1.5 tracking-wider';
+                                viewLabel.innerText = viewLabels[viewIndex];
+                                view.appendChild(viewLabel);
+                                views.appendChild(view);
+                            });
+                            groupCard.appendChild(views);
+                            headpieceGrid.appendChild(groupCard);
                         });
-                        scrollContainer.appendChild(productGrid);
+                        scrollContainer.appendChild(headpieceGrid);
+
+                        const apparelHeader = document.createElement('div');
+                        apparelHeader.className = 'w-full max-w-6xl mt-6 pt-6 border-t border-white/10';
+                        apparelHeader.innerHTML = currentLanguage === 'zh'
+                            ? '<h5 class="text-white text-sm font-medium">成衣产品视觉</h5><p class="text-gray-500 text-xs mt-1">完整展示单品廓形、材质与图案方向。</p>'
+                            : '<h5 class="text-white text-sm font-medium">Apparel Product Visuals</h5><p class="text-gray-500 text-xs mt-1">Full-product views for silhouette, material and graphic direction.</p>';
+                        scrollContainer.appendChild(apparelHeader);
+
+                        const apparelGrid = document.createElement('div');
+                        apparelGrid.className = 'grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 w-full max-w-6xl';
+                        ['29', '30', '32', '33'].forEach(num => {
+                            const frame = document.createElement('div');
+                            frame.className = 'aspect-square rounded-xl bg-white p-3 md:p-4 flex items-center justify-center overflow-hidden shadow-2xl';
+                            frame.appendChild(createProtectedImage(`image/aigc/wind_friends/products/product_${num}.jpg`, 'w-full h-full object-contain'));
+                            apparelGrid.appendChild(frame);
+                        });
+                        scrollContainer.appendChild(apparelGrid);
+
+                        const setBlock = document.createElement('div');
+                        setBlock.className = 'w-full max-w-6xl mt-6 rounded-2xl border border-rose-400/20 bg-rose-400/[0.06] p-4 md:p-6';
+                        setBlock.innerHTML = currentLanguage === 'zh'
+                            ? '<p class="text-rose-300 text-[10px] font-semibold tracking-[0.2em] uppercase">成套产品视觉</p><h5 class="text-white text-base md:text-lg font-medium mt-2">银色羽绒服 × 银色半裙</h5><p class="text-gray-400 text-xs mt-2 leading-relaxed">两件产品以一致的金属银材质、蝴蝶绗缝与粉色细节构成完整套装。</p>'
+                            : '<p class="text-rose-300 text-[10px] font-semibold tracking-[0.2em] uppercase">Coordinated Set</p><h5 class="text-white text-base md:text-lg font-medium mt-2">Metallic Puffer Jacket × Metallic Skirt</h5><p class="text-gray-400 text-xs mt-2 leading-relaxed">A coordinated set united by metallic silver material, butterfly quilting and pink accents.</p>';
+
+                        const setGrid = document.createElement('div');
+                        setGrid.className = 'grid grid-cols-2 gap-3 md:gap-5 mt-4';
+                        [
+                            { num: '39', zh: '银色羽绒服', en: 'Metallic Puffer Jacket' },
+                            { num: '37', zh: '银色半裙', en: 'Metallic Skirt' }
+                        ].forEach(item => {
+                            const product = document.createElement('div');
+                            const frame = document.createElement('div');
+                            frame.className = 'aspect-square rounded-xl bg-white p-3 md:p-5 flex items-center justify-center overflow-hidden';
+                            frame.appendChild(createProtectedImage(`image/aigc/wind_friends/products/product_${item.num}.jpg`, 'w-full h-full object-contain'));
+                            product.appendChild(frame);
+
+                            const caption = document.createElement('p');
+                            caption.className = 'text-center text-gray-300 text-[10px] md:text-xs mt-2';
+                            caption.innerText = currentLanguage === 'zh' ? item.zh : item.en;
+                            product.appendChild(caption);
+                            setGrid.appendChild(product);
+                        });
+                        setBlock.appendChild(setGrid);
+                        scrollContainer.appendChild(setBlock);
 
                         addSectionTitle('02', '模特上身视觉', 'On-body Visualization', '进一步验证整套搭配、体量关系与系列视觉一致性。', 'Testing complete styling, volume relationships and visual consistency across the collection.');
                         const lookGrid = document.createElement('div');
