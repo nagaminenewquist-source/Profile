@@ -222,7 +222,7 @@
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <h4 class="text-lg font-medium text-gray-900">创意企划趋势设计师</h4>
-                                    <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded">2025.06 - 2026.01</span>
+                                    <span class="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded">2024.06 - 2026.01</span>
                                 </div>
                                 <ul class="text-sm text-gray-600 list-disc list-outside ml-4 space-y-1">
                                     <li>独立负责婴幼童产品线季度创意主题及品类企划，输出洞察报告，产出落地开发规划。</li>
@@ -334,6 +334,22 @@
                             <h3 class="text-gray-900 text-sm font-medium mb-2">226女中童快反系列 (草图转生成)</h3>
                             <p class="text-gray-500 text-xs leading-relaxed">
                                 从 11 张设计师线稿出发，利用 AI 独立生成 11 款精细化款式图、8 张高保真模特上身图及主视觉海报，大幅缩短开发周期。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2b. 【AIGC：10D 女中童快反系列工作流】 -->
+                <div class="portfolio-item aigc masonry-item cursor-pointer" data-gallery="10d_girl">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative bg-gray-50">
+                            <img src="image/aigc/10d_cover.jpg" alt="AIGC Workflow" class="scale-hover w-full h-auto object-cover" oncontextmenu="return false;" draggable="false">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-green-500 mb-1.5 block uppercase tracking-widest font-semibold">AI Workflow / Fast Fashion</span>
+                            <h3 class="text-gray-900 text-sm font-medium mb-2">10D 女中童快反系列 (草图转生成)</h3>
+                            <p class="text-gray-500 text-xs leading-relaxed">
+                                从 14 款设计师线稿出发，利用 AI 生成 15 张精细化款式图、11 组搭配方案、18 张高保真模特上身图及主视觉海报，快速完成整套快反视觉。
                             </p>
                         </div>
                     </div>
@@ -716,6 +732,8 @@
                 '网页设计': 'Web Design',
                 '26Q4 帽子展示视频': '26Q4 Headwear Showcase',
                 '226女中童快反系列 (草图转生成)': '226 Girls’ Rapid-Response Collection (Sketch to AI)',
+                '10D 女中童快反系列 (草图转生成)': '10D Girls’ Rapid-Response Collection (Sketch to AI)',
+                '从 14 款设计师线稿出发，利用 AI 生成 15 张精细化款式图、11 组搭配方案、18 张高保真模特上身图及主视觉海报，快速完成整套快反视觉。': 'Starting from 14 designer sketches, AI was used to create 15 refined flats, 11 outfit boards, 18 high-fidelity model looks and a key campaign visual—delivering the full rapid-response visual package at speed.',
                 '从 11 张设计师线稿出发，利用 AI 独立生成 11 款精细化款式图、8 张高保真模特上身图及主视觉海报，大幅缩短开发周期。': 'Starting with 11 designer sketches, I used AI to create 11 refined flats, 8 high-fidelity model looks and a key campaign visual—significantly shortening the development cycle.',
                 '风的朋友｜AIGC 产品视觉转化': 'Friends of the Wind | AIGC Product Visualization',
                 '将设计师创意草图快速转化为产品效果图与模特上身视觉，用于方向验证、系列定调与开发沟通。': 'Rapidly translating designer sketches into product and on-body visuals for direction validation, collection alignment and development communication.',
@@ -890,6 +908,38 @@
                             const num = i.toString().padStart(2, '0');
                             scrollContainer.appendChild(createProtectedImage(`image/aigc/226_girl/model_${num}.jpg`, 'w-full max-w-4xl h-auto shadow-xl rounded'));
                         }
+
+                        lightboxContent.appendChild(scrollContainer);
+
+                    } else if (galleryType === '10d_girl') {
+                        // 10D 快反画廊：与 226 相同的纵向工作流排版
+                        const scrollContainer = document.createElement('div');
+                        scrollContainer.className = 'w-full h-full max-h-[90vh] overflow-y-auto custom-scrollbar bg-black/50 p-4 rounded-xl flex flex-col items-center gap-6';
+
+                        const titleDiv = document.createElement('div');
+                        titleDiv.innerHTML = currentLanguage === 'zh'
+                            ? '<h3 class="text-white text-2xl font-bold tracking-widest text-center mt-4">10D 女中童快反系列 工作流展示</h3><p class="text-gray-400 text-sm text-center mb-4">草图 ➡️ 款式图 ➡️ 搭配方案 ➡️ 模特上身图</p>'
+                            : '<h3 class="text-white text-2xl font-bold tracking-widest text-center mt-4">10D Girls’ Rapid-Response Workflow</h3><p class="text-gray-400 text-sm text-center mb-4">Sketches ➡️ Flats ➡️ Outfit Boards ➡️ Model Looks</p>';
+                        scrollContainer.appendChild(titleDiv);
+
+                        scrollContainer.appendChild(createProtectedImage('image/aigc/10d_cover.jpg', 'w-full max-w-4xl h-auto shadow-xl rounded'));
+
+                        const phases = [
+                            ['Phase 1: Sketches (1-15)', 'sketch', 15],
+                            ['Phase 2: Flats (1-15)', 'flat', 15],
+                            ['Phase 3: Outfit Boards (1-11)', 'outfit', 11],
+                            ['Phase 4: Model Fits (1-18)', 'model', 18]
+                        ];
+                        phases.forEach(([label, prefix, count]) => {
+                            const phaseTitle = document.createElement('h4'); phaseTitle.className = 'text-gray-300 font-bold tracking-widest uppercase mt-8 mb-2 border-b border-gray-600 pb-2 w-full max-w-4xl'; phaseTitle.innerText = label; scrollContainer.appendChild(phaseTitle);
+                            for (let i = 1; i <= count; i++) {
+                                const num = i.toString().padStart(2, '0');
+                                scrollContainer.appendChild(createProtectedImage(`image/aigc/10d_girl/${prefix}_${num}.jpg`, 'w-full max-w-4xl h-auto shadow-xl rounded'));
+                            }
+                        });
+
+                        const posterTitle = document.createElement('h4'); posterTitle.className = 'text-gray-300 font-bold tracking-widest uppercase mt-8 mb-2 border-b border-gray-600 pb-2 w-full max-w-4xl'; posterTitle.innerText = 'Key Visual'; scrollContainer.appendChild(posterTitle);
+                        scrollContainer.appendChild(createProtectedImage('image/aigc/10d_girl/poster_main.jpg', 'w-full max-w-4xl h-auto shadow-xl rounded'));
 
                         lightboxContent.appendChild(scrollContainer);
 
