@@ -299,20 +299,35 @@
                     <p class="text-gray-500 mt-2">AIGC 视觉生成 / 趋势企划 / 运动服饰设计 / 视频与互动</p>
                 </div>
                 
-                <!-- 筛选按钮 (包含全部6个类别) -->
+                <!-- 筛选按钮 (全部 + 5 个类别；网页设计已并入互动体验) -->
                 <div class="flex space-x-2 mt-6 md:mt-0 overflow-x-auto pb-2" id="filter-buttons">
                     <button class="filter-btn active px-4 py-1.5 text-sm rounded-full bg-black text-white transition-colors whitespace-nowrap" data-filter="all">全部</button>
                     <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors whitespace-nowrap" data-filter="aigc">AIGC 生成</button>
                     <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors whitespace-nowrap" data-filter="fashion">服装企划</button>
                     <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors whitespace-nowrap" data-filter="video">视频项目</button>
                     <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors whitespace-nowrap" data-filter="interactive">互动体验</button>
-                    <button class="filter-btn px-4 py-1.5 text-sm rounded-full border border-gray-300 text-gray-600 hover:border-black transition-colors whitespace-nowrap" data-filter="web">网页设计</button>
                 </div>
             </div>
 
             <!-- 瀑布流画廊容器 -->
             <div class="columns-1 sm:columns-2 lg:columns-3 masonry-grid" id="portfolio-gallery">
-                
+
+                <!-- 0. 【视频：AI 换装结项成果短片】 -->
+                <div class="portfolio-item video aigc masonry-item cursor-pointer">
+                    <div class="portfolio-card bg-white rounded-xl overflow-hidden">
+                        <div class="media-container relative pointer-events-none bg-gray-50 aspect-video">
+                            <video src="video/ai_tryon_closing.mp4" poster="image/aigc/ai_tryon_poster.jpg" controlsList="nodownload" oncontextmenu="return false;" class="scale-hover w-full h-full object-cover" muted loop autoplay playsinline></video>
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs text-gray-400 mb-1.5 block uppercase tracking-widest font-semibold">AI Try-on · Project Recap / Motion</span>
+                            <h3 class="text-gray-900 text-sm font-medium mb-2">AI 换装｜结项成果短片</h3>
+                            <p class="text-gray-500 text-xs leading-relaxed">
+                                20 秒讲完 AI 换装项目成果：平铺图一键变成模特上身，登上 326 订货会走秀主屏，426 订货会 3 天交付 334 套 Look，84/89 位设计师已自助使用。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 1. 【视频：26Q4 帽子展示】 -->
                 <div class="portfolio-item video masonry-item cursor-pointer">
                     <div class="portfolio-card bg-white rounded-xl overflow-hidden">
@@ -419,9 +434,9 @@
                     </div>
                 </div>
 
-                <!-- 6. 【网页设计：滨江地图 (手机样机点击放大)】 -->
+                <!-- 6. 【互动体验：滨江地图 (手机样机点击放大)】 -->
                 <!-- 使用 data-gallery="binjiang_web" 标记，让 JS 拦截处理特殊的放大逻辑 -->
-                <div class="portfolio-item web masonry-item cursor-pointer" data-gallery="binjiang_web">
+                <div class="portfolio-item interactive masonry-item cursor-pointer" data-gallery="binjiang_web">
                     <div class="portfolio-card bg-white rounded-xl overflow-hidden p-6 sm:p-8">
                         <div class="mb-6">
                             <span class="text-xs text-orange-500 mb-1.5 block uppercase tracking-widest font-semibold">Web Design / 滨江快闪店交互地图</span>
@@ -546,8 +561,8 @@
                     </div>
                 </div>
                 
-                <!-- 14. 【网页设计：世界杯 AI 营销 H5】 -->
-                <div class="portfolio-item web aigc masonry-item cursor-pointer" data-gallery="campaign_h5">
+                <!-- 14. 【互动体验：世界杯 AI 营销 H5】 -->
+                <div class="portfolio-item interactive aigc masonry-item cursor-pointer" data-gallery="campaign_h5">
                     <div class="portfolio-card bg-white rounded-xl overflow-hidden">
                         <div class="media-container relative pointer-events-none bg-black aspect-[9/16]">
                             <video src="video/campaign_h5_intro.mp4" poster="image/web/campaign_h5/h5_ui_2.png" controlsList="nodownload" oncontextmenu="return false;" class="scale-hover w-full h-full object-cover" muted loop autoplay playsinline></video>
@@ -742,7 +757,8 @@
                 '服装企划': 'Fashion Planning',
                 '视频项目': 'Film',
                 '互动体验': 'Interactive',
-                '网页设计': 'Web Design',
+                'AI 换装｜结项成果短片': 'AI Try-on | Project Recap Film',
+                '20 秒讲完 AI 换装项目成果：平铺图一键变成模特上身，登上 326 订货会走秀主屏，426 订货会 3 天交付 334 套 Look，84/89 位设计师已自助使用。': 'The AI try-on project in 20 seconds: flat lays become on-model looks in one click, took over the runway screens at the 326 order fair, delivered 334 looks in 3 days for 426, and is now self-served by 84 of 89 designers.',
                 '26Q4 帽子展示视频': '26Q4 Headwear Showcase',
                 '226女中童快反系列 (草图转生成)': '226 Girls’ Rapid-Response Collection (Sketch to AI)',
                 '10D 女中童快反系列 (草图转生成)': '10D Girls’ Rapid-Response Collection (Sketch to AI)',
